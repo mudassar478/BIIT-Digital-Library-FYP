@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="#ECEFEA"
+    android:layout_marginTop="5dp">
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:layout_width="217dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="LessonPlan 1"
+        android:textColor="@color/black"
+        android:id="@+id/lessonplanNo"/>
+
+</LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="149dp"
+            android:layout_height="wrap_content"
+            android:text="time and date"
+            android:textColor="@color/black"
+            android:id="@+id/timeanddate"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

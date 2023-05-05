@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".studentActivites.Student_dashboard"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Student Dashboard"
+        android:background="@color/primary"
+        app:titleTextColor="@color/white"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome Student"
+        android:layout_marginLeft="100dp"
+        android:textSize="18dp"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="19-ARID-0110"
+        android:layout_marginLeft="100dp"
+        android:textSize="18dp"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="40dp"
+        >
+        <ImageView
+            android:id="@+id/img_std_Courses"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/courses"
+            android:layout_marginLeft="10dp"
+            />
+        <ImageView
+            android:id="@+id/img_std_Books"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/img_books"
+            android:layout_marginLeft="12dp"
+            />
+        <ImageView
+            android:id="@+id/img_std_Bookmarks"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/bookmarks"
+            android:layout_marginLeft="12dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Courses"
+            android:layout_marginLeft="40dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Books"
+            android:layout_marginLeft="78dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save Items"
+            android:layout_marginLeft="80dp"/>
+
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

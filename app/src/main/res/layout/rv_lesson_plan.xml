@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginTop="5dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:background="#ECEFEA">
+
+
+<LinearLayout
+    android:layout_marginTop="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+
+    >
+    <TextView
+        android:id="@+id/filename_lessonplan"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="file.doc"
+        android:textColor="@color/black"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="8dp"
+        android:textSize="16dp"
+        />
+    <ImageButton
+        android:id="@+id/refrences_lessonplan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/link"
+        />
+    <ImageButton
+        android:id="@+id/edit_lessonplan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/ic_edit"
+        />
+    <ImageButton
+        android:id="@+id/delete_lessonplan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/ic_delete"
+        />
+
+
+</LinearLayout>
+
+</LinearLayout>
+
+</LinearLayout>

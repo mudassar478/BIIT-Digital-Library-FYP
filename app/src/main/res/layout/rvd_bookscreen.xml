@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_marginTop="5dp"
+       android:background="#ECEFEA"
+       >
+       <ImageView
+           android:layout_width="100dp"
+           android:layout_height="100dp"
+           android:id="@+id/img_bookupload"
+           android:src="@drawable/book1"
+           android:layout_centerVertical="true"
+           />
+
+       <TextView
+           android:id="@+id/book_name"
+            android:text="Hello"
+           android:layout_width="180dp"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="7dp"
+           android:layout_marginTop="30dp"
+           android:layout_centerVertical="true"
+           android:layout_marginStart="7dp"
+           android:layout_toRightOf="@+id/img_bookupload"
+           android:textSize="16dp"
+           android:textColor="@color/black"/>
+       <Button
+           android:id="@+id/btn_toc"
+           android:layout_width="wrap_content"
+           android:layout_height="40dp"
+           android:textSize="15dp"
+           android:backgroundTint="@color/primary"
+           android:textColor="@color/white"
+           android:text="TOC"
+           android:layout_marginLeft="100dp"
+           android:layout_marginTop="76dp"
+           android:layout_alignParentEnd="true"
+           android:layout_marginEnd="10dp"
+           />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:id="@+id/btn_download"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/download"
+            android:layout_toLeftOf="@+id/btn_fav"
+            android:foreground="?selectableItemBackground"
+            android:layout_centerVertical="true"
+            />
+        <ImageView
+            android:id="@+id/btn_fav"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/star"
+            android:layout_marginEnd="10dp"
+            android:foreground="?selectableItemBackground"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            />
+
+
+   </RelativeLayout>
+</LinearLayout>

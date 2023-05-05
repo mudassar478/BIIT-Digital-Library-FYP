@@ -2,7 +2,8 @@
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ECEFEA">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="200dp"
@@ -29,8 +30,9 @@
     android:layout_height="wrap_content"
     android:hint="@string/enter_id"
     android:id="@+id/etid"
-    android:inputType="number"
-    android:maxLines="1"/>
+    android:inputType="text"
+    android:maxLines="1"
+       android:textColor="@color/black"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -42,16 +44,18 @@
         android:id="@+id/edittxt_pass"
         app:boxBackgroundColor="#D3E6BD"
         android:layout_below="@id/edittxtid"
-        app:startIconDrawable="@drawable/ic_baseline_password_24"
+        app:startIconDrawable="@drawable/key"
         android:layout_marginHorizontal="40dp"
         >
+
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etpassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_password"
-            android:id="@+id/etpassword"
-            android:inputType="number"
-            android:maxLines="1"/>
+            android:inputType="numberPassword"
+            android:maxLines="1"
+            android:textColor="@color/black"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,5 +72,6 @@
         android:backgroundTint="@color/primary"
         android:textColor="@color/white"
         android:background="@drawable/rounded_corner"
+        android:foreground="?selectableItemBackground"
 />
 </RelativeLayout>

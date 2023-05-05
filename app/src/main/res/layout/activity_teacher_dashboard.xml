@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".teacherActivities.Teacher_dashboard"
+    android:orientation="vertical"
+    android:background="#ECEFEA">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Teacher Dashboard"
+        android:background="@color/primary"
+        app:titleTextColor="@color/white"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/primary"
+        android:layout_marginTop="10dp"
+        android:text="Teacher"
+        android:gravity="center"
+        android:textSize="23dp" />
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_marginTop="38dp">
+
+       <ImageView
+           android:id="@+id/img_course"
+           android:layout_width="140dp"
+           android:layout_height="140dp"
+           android:layout_marginLeft="30dp"
+           android:src="@drawable/img_courses" />
+
+       <ImageView
+           android:id="@+id/img_studentlogs"
+           android:layout_width="140dp"
+           android:layout_height="130dp"
+           android:src="@drawable/student_logs"
+        android:layout_marginLeft="50dp"/>
+
+
+   </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Courses"
+            android:layout_marginLeft="70dp"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Student Logs"
+            android:layout_marginLeft="89dp"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="38dp">
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/img_books"
+            android:src="@drawable/img_books"
+            android:layout_marginLeft="30dp"
+            />
+        <ImageView
+            android:layout_width="145dp"
+            android:layout_height="145dp"
+            android:id="@+id/img_mybooks"
+            android:src="@drawable/mybooks"
+            android:layout_marginLeft="50dp"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Books"
+            android:layout_marginLeft="70dp"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Books"
+            android:layout_marginLeft="125dp"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
