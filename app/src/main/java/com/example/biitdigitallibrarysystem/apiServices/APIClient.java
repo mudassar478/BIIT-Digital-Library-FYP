@@ -18,7 +18,7 @@ public class APIClient {
                     connectTimeout(60, TimeUnit.SECONDS)
                     .writeTimeout(10,TimeUnit.MINUTES)
                     .addInterceptor(interceptor).build();
-            retrofit = new Retrofit.Builder().baseUrl("http://192.168.162.147/Final_Year_Project/api/")
+            retrofit = new Retrofit.Builder().baseUrl("http://192.168.8.101/Final_Year_Project/api/")
                     .addConverterFactory(GsonConverterFactory.create()).client(client).build();
             return retrofit;
         }

@@ -58,11 +58,13 @@ public class MainActivity extends AppCompatActivity {
                                        // userid = list.get(0).getSid();
                                         Intent intent = new Intent(MainActivity.this, Teacher_dashboard.class);
                                         startActivity(intent);
+                                        Toast.makeText(MainActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                                     }
                                     if (Objects.equals(loginModel.getRole(), "student")) {
                                         //userid = list.get(0).getSid();
                                         Intent intent = new Intent(MainActivity.this, Student_dashboard.class);
                                         startActivity(intent);
+                                        Toast.makeText(MainActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                                     }
                                 } else {
                                     Toast.makeText(MainActivity.this, "" + response.message(), Toast.LENGTH_SHORT).show();
