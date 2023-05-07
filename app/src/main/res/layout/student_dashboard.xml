@@ -4,58 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".studentActivites.Student_dashboard"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".studentActivites.Student_dashboard">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Student Dashboard"
         android:background="@color/primary"
-        app:titleTextColor="@color/white"
-        />
+        app:title="Student Dashboard"
+        app:titleTextColor="@color/white" />
+
     <TextView
+        android:id="@+id/tv_student"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
         android:text="Welcome Student"
-        android:layout_marginLeft="100dp"
+        android:textColor="@color/primary"
         android:textSize="18dp"
-        android:layout_marginTop="10dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="19-ARID-0110"
-        android:layout_marginLeft="100dp"
-        android:textSize="18dp"
-        android:layout_marginTop="10dp"/>
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_gravity="center"
         android:layout_marginTop="40dp"
-        >
+        android:orientation="horizontal"
+        android:weightSum="3">
+
         <ImageView
             android:id="@+id/img_std_Courses"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@drawable/courses"
-            android:layout_marginLeft="10dp"
-            />
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:src="@drawable/courses" />
+
         <ImageView
             android:id="@+id/img_std_Books"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@drawable/img_books"
-            android:layout_marginLeft="12dp"
-            />
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:src="@drawable/img_books" />
+
         <ImageView
             android:id="@+id/img_std_Bookmarks"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@drawable/bookmarks"
-            android:layout_marginLeft="12dp"
-            />
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:src="@drawable/bookmarks" />
 
     </LinearLayout>
 
@@ -63,25 +61,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        >
+        android:weightSum="3">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Courses"
-            android:layout_marginLeft="40dp"/>
+            android:layout_marginLeft="40dp"
+            android:text="Courses" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Books"
-            android:layout_marginLeft="78dp"/>
+            android:layout_marginLeft="78dp"
+            android:text="Books" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save Items"
-            android:layout_marginLeft="80dp"/>
-
-
-
+            android:layout_marginLeft="80dp"
+            android:text="Save Items" />
 
 
     </LinearLayout>

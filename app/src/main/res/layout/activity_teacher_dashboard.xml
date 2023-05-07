@@ -20,108 +20,147 @@
         android:textColor="@color/primary"
         android:layout_marginTop="10dp"
         android:text="Teacher"
+        android:id="@+id/tv_teacherName"
         android:gravity="center"
-        android:textSize="23dp" />
+        android:textSize="18dp" />
 
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:orientation="horizontal"
-       android:layout_marginTop="38dp">
+       android:layout_marginTop="38dp"
+       android:weightSum="2"
+       >
 
-       <ImageView
-           android:id="@+id/img_course"
-           android:layout_width="140dp"
-           android:layout_height="140dp"
-           android:layout_marginLeft="30dp"
-           android:src="@drawable/img_courses" />
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_weight="1"
+           android:orientation="vertical"
+           android:gravity="center"
+           android:id="@+id/layout_course"
+           android:foreground="?selectableItemBackground"
+           >
+           <ImageView
+               android:id="@+id/img_course"
+               android:layout_width="120dp"
+               android:layout_height="120dp"
+               android:src="@drawable/img_courses"
+               android:layout_weight="1"
+               />
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Courses"
+               android:textSize="15dp"
+               android:textColor="@color/black"
+               android:textStyle="bold"
+               android:layout_weight="1"
+               android:gravity="center"
+                android:layout_marginTop="7dp"
+               />
 
-       <ImageView
-           android:id="@+id/img_studentlogs"
-           android:layout_width="140dp"
-           android:layout_height="130dp"
-           android:src="@drawable/student_logs"
-        android:layout_marginLeft="50dp"/>
+       </LinearLayout>
 
+
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_weight="1"
+           android:orientation="vertical"
+           android:gravity="center"
+           android:id="@+id/layout_studentlogs"
+           android:foreground="?selectableItemBackground"
+
+           >
+           <ImageView
+               android:id="@+id/img_studentlogs"
+               android:layout_width="120dp"
+               android:layout_height="120dp"
+               android:src="@drawable/student_logs"
+               android:layout_weight="1"
+               />
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Student Logs"
+               android:textSize="15dp"
+               android:textColor="@color/black"
+               android:textStyle="bold"
+               android:layout_weight="1"
+               android:layout_marginTop="7dp"
+               />
+
+       </LinearLayout>
 
    </LinearLayout>
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="38dp"
+        android:weightSum="2"
         >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Courses"
-            android:layout_marginLeft="70dp"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Student Logs"
-            android:layout_marginLeft="89dp"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:id="@+id/layout_Books"
+            android:foreground="?selectableItemBackground"
+
+            >
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:id="@+id/img_books"
+                android:src="@drawable/img_books"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Books"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:id="@+id/layout_Mybooks"
+            android:foreground="?selectableItemBackground"
+            >
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:id="@+id/img_mybooks"
+                android:src="@drawable/mybooks"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Books"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_weight="1"
+
+                />
+        </LinearLayout>
 
     </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="38dp">
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:id="@+id/img_books"
-            android:src="@drawable/img_books"
-            android:layout_marginLeft="30dp"
-            />
-        <ImageView
-            android:layout_width="145dp"
-            android:layout_height="145dp"
-            android:id="@+id/img_mybooks"
-            android:src="@drawable/mybooks"
-            android:layout_marginLeft="50dp"
-            />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Books"
-            android:layout_marginLeft="70dp"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="My Books"
-            android:layout_marginLeft="125dp"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            />
-
-
-    </LinearLayout>
-
 
 
 
