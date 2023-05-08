@@ -33,7 +33,7 @@ public class Student_dashboard extends AppCompatActivity {
         im1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(Student_dashboard.this, CoursesActivity.class);
+                Intent i=new Intent(Student_dashboard.this, Student_Courses.class);
                 startActivity(i);
 
             }
