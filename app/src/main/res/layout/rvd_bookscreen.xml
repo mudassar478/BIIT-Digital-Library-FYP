@@ -28,7 +28,7 @@
            android:layout_centerVertical="true"
            android:layout_marginStart="7dp"
            android:layout_toRightOf="@+id/img_bookupload"
-           android:textSize="16dp"
+           android:textSize="11dp"
            android:textColor="@color/black"/>
        <Button
            android:id="@+id/btn_toc"

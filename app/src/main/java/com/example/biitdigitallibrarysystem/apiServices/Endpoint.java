@@ -1,5 +1,6 @@
 package com.example.biitdigitallibrarysystem.apiServices;
 
+import com.example.biitdigitallibrarysystem.models.LibraryBook;
 import com.example.biitdigitallibrarysystem.models.LoginModel;
 import com.example.biitdigitallibrarysystem.models.WeekNumModel;
 import com.example.biitdigitallibrarysystem.models.WeeksModel;
@@ -36,5 +37,6 @@ public interface Endpoint {
     @POST("TeacherCourse/TeacherUploadLessonPlan")
     Call<ResponseBody> teacherUpload(@Query("tid") int tid,@Query("cid") int cid,@Query("title") String title,@Query("week") String week);
 
-
+    @GET("TeacherBook/TeacherFetchLibraryBook")
+    Call<ArrayList<LibraryBook>> fetchLibraryBooks();
 }

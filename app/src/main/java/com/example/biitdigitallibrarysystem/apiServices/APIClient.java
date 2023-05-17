@@ -10,6 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class APIClient {
 
         private static Retrofit retrofit = null;
+        private static String ip = "192.168.100.95";
         public static Retrofit getClient()
         {
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -18,9 +19,18 @@ public class APIClient {
                     connectTimeout(60, TimeUnit.SECONDS)
                     .writeTimeout(10,TimeUnit.MINUTES)
                     .addInterceptor(interceptor).build();
-            retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.217/Final_Year_Project/api/")
+            retrofit = new Retrofit.Builder().baseUrl("http://"+ip+"/Final_Year_Project/api/")
                     .addConverterFactory(GsonConverterFactory.create()).client(client).build();
             return retrofit;
         }
+    public static String getFilePath()
+    {
+
+        return "http://"+ip+"/Final_Year_Project/Content/Books/";
+    }
+    public static String getImagePath()
+    {
+        return "http://"+ip+"/Final_Year_Project/Content/BookImages/";
+    }
     }
 

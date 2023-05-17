@@ -1,5 +1,6 @@
 package com.example.biitdigitallibrarysystem.teacherActivities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,18 +8,28 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.biitdigitallibrarysystem.R;
 import com.example.biitdigitallibrarysystem.adapters.LibraryBooksAdapter;
+import com.example.biitdigitallibrarysystem.apiServices.APIClient;
+import com.example.biitdigitallibrarysystem.apiServices.Endpoint;
 import com.example.biitdigitallibrarysystem.models.Bookscreen;
+import com.example.biitdigitallibrarysystem.models.LibraryBook;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class Tech_LibraryBooks extends AppCompatActivity {
     RecyclerView librarybooks;
     FloatingActionButton btn_float;
     LibraryBooksAdapter booksAdapter;
+    ArrayList<LibraryBook> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,23 +41,31 @@ public class Tech_LibraryBooks extends AppCompatActivity {
 
         ArrayList<Bookscreen> books = new ArrayList<>();
         librarybooks=findViewById(R.id.rv_Librarybooks);
-        books.add(new Bookscreen("Introduction to C++"));
-        books.add(new Bookscreen("Calculus Edition 2"));
-        books.add(new Bookscreen("Arithmetic Algorithms"));
-        books.add(new Bookscreen("Introduction to OOP"));
-        books.add(new Bookscreen("C# Edition 1"));
-        books.add(new Bookscreen("Introduction to Database "));
-        books.add(new Bookscreen("Artificial Intelligence"));
-        books.add(new Bookscreen("Compiler Construction"));
-        books.add(new Bookscreen("Computer Networking"));
-        books.add(new Bookscreen("Digital And Logical Designs"));
-        books.add(new Bookscreen("English by Wren and Martin"));
-        books.add(new Bookscreen("Introduction to Computer"));
-        books.add(new Bookscreen("Web Designing"));
+        Retrofit retrofit = APIClient.getClient();
+        Endpoint endpoint = retrofit.create(Endpoint.class);
+        endpoint.fetchLibraryBooks().enqueue(new Callback<ArrayList<LibraryBook>>() {
+            @Override
+            public void onResponse(@NonNull Call<ArrayList<LibraryBook>> call, @NonNull Response<ArrayList<LibraryBook>> response) {
+                if(response.isSuccessful())
+                {
+                    list = response.body();
+                    librarybooks.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    booksAdapter = new LibraryBooksAdapter(Tech_LibraryBooks.this , list);
+                    librarybooks.setAdapter(booksAdapter);
+                    librarybooks.setHasFixedSize(true);
+                }
+                else
+                {
+                    Toast.makeText(Tech_LibraryBooks.this, ""+response.message(), Toast.LENGTH_SHORT).show();
+                }
+            }
 
-        booksAdapter = new LibraryBooksAdapter(this , books);
-        librarybooks.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        librarybooks.setAdapter(booksAdapter);
+            @Override
+            public void onFailure(Call<ArrayList<LibraryBook>> call, Throwable t) {
+                Toast.makeText(Tech_LibraryBooks.this, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         btn_float.setOnClickListener(new View.OnClickListener() {
             @Override
