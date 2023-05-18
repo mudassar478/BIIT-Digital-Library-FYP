@@ -13,6 +13,13 @@
         app:titleTextColor="@color/white"
         app:title="Books Screen"
         android:background="@color/primary"/>
+    <androidx.appcompat.widget.SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@color/bg"
+       />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,17 +53,16 @@
         android:layout_width="match_parent"
         android:layout_height="650dp"/>
 
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatBtn_uploadbook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/primary"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
         android:src="@drawable/ic_baseline_add_24"
-        android:layout_gravity="center"/>
+        app:backgroundTint="@color/primary" />
+
 
 
 

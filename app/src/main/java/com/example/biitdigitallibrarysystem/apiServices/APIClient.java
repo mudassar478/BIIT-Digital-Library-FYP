@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class APIClient {
 
         private static Retrofit retrofit = null;
-        private static String ip = "192.168.100.95";
+        private static String ip = "192.168.233.147";
         public static Retrofit getClient()
         {
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();

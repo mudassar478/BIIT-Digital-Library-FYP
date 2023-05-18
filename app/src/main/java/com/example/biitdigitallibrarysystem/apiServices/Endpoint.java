@@ -29,8 +29,6 @@ public interface Endpoint {
     Call<ArrayList<WeekNumModel>>TeacherFetchLessonplan(@Query("cid")int cid,@Query("tid")int tid);
 
 
-
-
     @GET("StudentLogs/FetchSection")
     Call<JsonArray> fetchSection(@Query("tid")int tid);
 
@@ -39,4 +37,7 @@ public interface Endpoint {
 
     @GET("TeacherBook/TeacherFetchLibraryBook")
     Call<ArrayList<LibraryBook>> fetchLibraryBooks();
+
+    @GET("TeacherBook/TeacherFetchTableofContent")
+    Call<JsonArray> TeacherFetchTableofContent(@Query("bid") int bid);
 }

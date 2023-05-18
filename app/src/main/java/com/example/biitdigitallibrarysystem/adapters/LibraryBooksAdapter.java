@@ -1,6 +1,7 @@
 package com.example.biitdigitallibrarysystem.adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -21,6 +22,10 @@ import com.example.biitdigitallibrarysystem.models.Bookscreen;
 import com.example.biitdigitallibrarysystem.models.DownloadImageTask;
 import com.example.biitdigitallibrarysystem.models.LibraryBook;
 import com.example.biitdigitallibrarysystem.models.PdfDownloader;
+import com.example.biitdigitallibrarysystem.teacherActivities.CoursesActivity;
+import com.example.biitdigitallibrarysystem.teacherActivities.TableOFContent;
+import com.example.biitdigitallibrarysystem.teacherActivities.Teacher_dashboard;
+import com.example.biitdigitallibrarysystem.teacherActivities.WeeksActivity;
 
 import java.util.ArrayList;
 
@@ -39,12 +44,12 @@ public class LibraryBooksAdapter extends RecyclerView.Adapter<LibraryBooksAdapte
 
         TextView Books;
         ImageView imageupload , btndownload , button3;
-        Button button1;
+        Button btn_toc;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             Books = itemView.findViewById(R.id.book_name);
             imageupload=itemView.findViewById(R.id.img_bookupload);
-            button1 = itemView.findViewById(R.id.btn_toc);
+            btn_toc = itemView.findViewById(R.id.btn_toc);
             btndownload = itemView.findViewById(R.id.btn_download);
             button3=itemView.findViewById(R.id.btn_fav);
         }
@@ -69,6 +74,16 @@ public class LibraryBooksAdapter extends RecyclerView.Adapter<LibraryBooksAdapte
             @Override
             public void onClick(View view) {
                 new PdfDownloader(context).downloadPdf(filePath+books.get(position).getPdf_path());
+            }
+        });
+        holder.btn_toc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TableOFContent.bid=books.get(position).getBid();
+                Intent i = new Intent(context.getApplicationContext(), TableOFContent.class);
+                context.startActivity(i);
+
+
             }
         });
     }
