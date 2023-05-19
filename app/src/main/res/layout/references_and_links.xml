@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".teacherActivities.ReferencesAndLinks"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -19,11 +20,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:hint="Add text here!!!!"
+
+
         />
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:id="@+id/spinnerReferencesLinks"
+
 
         />
     <Button

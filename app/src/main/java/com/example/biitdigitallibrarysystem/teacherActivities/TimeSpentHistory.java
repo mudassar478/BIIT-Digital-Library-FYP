@@ -47,6 +47,15 @@ public class TimeSpentHistory extends AppCompatActivity {
 
 
 
+        lesson.add(new timespendModel("Lesson Plan 6","2023-03-19  12:42:25  1:12:03"));
+        lesson.add(new timespendModel("Lesson Plan 8","2023-03-19  12:42:25  1:12:03"));
+        lesson.add(new timespendModel("Lesson Plan 2","2023-03-19  12:42:25  1:12:03"));
+        lesson.add(new timespendModel("Lesson Plan 3","2023-03-19  12:42:25  1:12:03"));
+        lesson.add(new timespendModel("Lesson Plan 1","2023-03-19  12:42:25  1:12:03"));
+        lesson.add(new timespendModel("Lesson Plan 2","2023-03-19  12:42:25  1:12:03"));
+
+
+
 
         timeSpentHistoryAdapter = new TimeSpentHistoryAdapter(this , lesson);
         rv_timeanddate.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
