@@ -12,7 +12,8 @@
 
     android:orientation="vertical"
 
-    tools:context=".SplashActivity">
+    tools:context=".SplashActivity"
+    android:background="@color/white">
 
 
     <ImageView
