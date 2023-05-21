@@ -16,8 +16,17 @@
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewStudentCourses"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:iconifiedByDefault="false"
+        app:queryBackground="@android:color/transparent"
+        app:queryHint="Search Here"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/bg"
         />
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

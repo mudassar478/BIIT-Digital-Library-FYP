@@ -16,12 +16,24 @@
 
     <TextView
         android:id="@+id/tv_student"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="Welcome Student"
+        android:textColor="@color/primary"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_Regno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:gravity="center"
-        android:text="Welcome Student"
+        android:text="Arid number"
         android:textColor="@color/primary"
         android:textSize="18dp"
         android:textStyle="bold" />
@@ -30,9 +42,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:orientation="horizontal"
-        android:weightSum="3">
+        android:weightSum="3"
+        >
 
         <ImageView
             android:id="@+id/img_std_Courses"
@@ -67,19 +80,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:text="Courses" />
+            android:text="Courses"
+            android:textSize="17dp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="78dp"
-            android:text="Books" />
+            android:text="Books"
+            android:textSize="17dp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
-            android:text="Save Items" />
+            android:text="Save Items"
+            android:textSize="17dp"
+            android:textColor="@color/black" />
 
 
     </LinearLayout>
