@@ -3,7 +3,6 @@ package com.example.biitdigitallibrarysystem.teacherActivities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,7 +15,7 @@ public class Teacher_dashboard extends AppCompatActivity {
     TextView tvTeacherName;
     private String teacherName;
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +23,7 @@ public class Teacher_dashboard extends AppCompatActivity {
         im = findViewById(R.id.layout_course);
         im2 = findViewById(R.id.layout_studentlogs);
         im3 = findViewById(R.id.layout_Books);
-        im4 = findViewById(R.id.layout_Mybooks);
+        im4 = findViewById(R.id.layout_Mybooks1);
         tvTeacherName = findViewById(R.id.tv_teacherName);
         Intent intent = getIntent();
         teacherName = intent.getStringExtra("TName");
@@ -40,6 +39,11 @@ public class Teacher_dashboard extends AppCompatActivity {
         });
         im3.setOnClickListener(view -> {
             Intent i = new Intent(Teacher_dashboard.this, Tech_LibraryBooks.class);
+            startActivity(i);
+
+        });
+        im4.setOnClickListener(view -> {
+            Intent i = new Intent(Teacher_dashboard.this, MyBookTeacher.class);
             startActivity(i);
 
         });

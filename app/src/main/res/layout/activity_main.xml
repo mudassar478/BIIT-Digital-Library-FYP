@@ -29,6 +29,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:hint="@string/enter_id"
+       android:text="ahsan@biit.edu.pk"
     android:id="@+id/etid"
     android:inputType="text"
     android:maxLines="1"
@@ -53,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_password"
+            android:text="123123"
             android:inputType="numberPassword"
             android:maxLines="1"
             android:textColor="@color/black"/>

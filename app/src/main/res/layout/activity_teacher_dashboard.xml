@@ -139,13 +139,13 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center"
-            android:id="@+id/layout_Mybooks"
+            android:id="@+id/layout_Mybooks1"
             android:foreground="?selectableItemBackground"
             >
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:id="@+id/img_mybooks"
+                android:id="@+id/img_mybooks11"
                 android:src="@drawable/mybooks"
                 />
             <TextView

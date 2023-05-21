@@ -24,6 +24,11 @@ public class CourseTAdapter extends RecyclerView.Adapter<CourseTAdapter.CourseHo
     Context context;
     ArrayList<CoursesClassModel> list;
 
+    @Override
+    public void setHasStableIds(boolean hasStableIds) {
+        super.setHasStableIds(hasStableIds);
+    }
+
     public CourseTAdapter(Context context, ArrayList<CoursesClassModel> list) {
         this.context = context;
         this.list = list;
@@ -38,14 +43,14 @@ public class CourseTAdapter extends RecyclerView.Adapter<CourseTAdapter.CourseHo
 
     @Override
     public void onBindViewHolder(@NonNull CourseTAdapter.CourseHolder holder, int position) {
-        final CoursesClassModel coursesClassModel=list.get(position);
-        holder.id.setText(coursesClassModel.getcid()+"");
+        final CoursesClassModel coursesClassModel = list.get(position);
+        holder.id.setText(coursesClassModel.getcid() + "");
         holder.tv_course_name.setText(coursesClassModel.getname());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(context,WeeksActivity.class);
-                intent.putExtra("cid",list.get(holder.getAdapterPosition()).getcid());
+                Intent intent = new Intent(context, WeeksActivity.class);
+                intent.putExtra("cid", list.get(holder.getAdapterPosition()).getcid());
                 context.startActivity(intent);
             }
         });
@@ -53,8 +58,8 @@ public class CourseTAdapter extends RecyclerView.Adapter<CourseTAdapter.CourseHo
         holder.id.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(context,WeeksActivity.class);
-                intent.putExtra("cid",list.get(holder.getAdapterPosition()).getcid());
+                Intent intent = new Intent(context, WeeksActivity.class);
+                intent.putExtra("cid", list.get(holder.getAdapterPosition()).getcid());
                 context.startActivity(intent);
             }
         });
@@ -69,15 +74,15 @@ public class CourseTAdapter extends RecyclerView.Adapter<CourseTAdapter.CourseHo
     public class CourseHolder extends RecyclerView.ViewHolder {
 
         ImageView iv_course;
-        TextView tv_course_name,id;
+        TextView tv_course_name, id;
         RelativeLayout rv_lesson;
 
         public CourseHolder(@NonNull View itemView) {
             super(itemView);
             iv_course = itemView.findViewById(R.id.iv_course_image);
             tv_course_name = itemView.findViewById(R.id.tv_course_name);
-            rv_lesson=itemView.findViewById(R.id.rv_lesson);
-            id=itemView.findViewById(R.id.course_id);
+            rv_lesson = itemView.findViewById(R.id.rv_lesson);
+            id = itemView.findViewById(R.id.course_id);
 
         }
     }

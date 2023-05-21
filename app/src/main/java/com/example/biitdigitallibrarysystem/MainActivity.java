@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     public static int userid;
     public static int tid, role;
+    public static String loginRole="";
     private String userName;
     ArrayList<LoginModel> list = new ArrayList<>();
 
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                                 tid = loginModel.getTid();
                                 userName = loginModel.getName();
                                 if (Objects.equals(loginModel.getRole(), "teacher")) {
+                                    loginRole="teacher";
                                     // userid = list.get(0).getSid();
                                     Intent intent = new Intent(MainActivity.this, Teacher_dashboard.class);
                                     intent.putExtra("TName", userName);
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                                     Toast.makeText(MainActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                                 }
                                 if (Objects.equals(loginModel.getRole(), "student")) {
+                                    loginRole="student";
                                     //userid = list.get(0).getSid();
                                     Intent intent = new Intent(MainActivity.this, Student_dashboard.class);
                                     intent.putExtra("TName", userName);

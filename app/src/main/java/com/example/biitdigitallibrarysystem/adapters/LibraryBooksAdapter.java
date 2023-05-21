@@ -1,7 +1,6 @@
 package com.example.biitdigitallibrarysystem.adapters;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -18,14 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.biitdigitallibrarysystem.R;
 import com.example.biitdigitallibrarysystem.apiServices.APIClient;
-import com.example.biitdigitallibrarysystem.models.Bookscreen;
 import com.example.biitdigitallibrarysystem.models.DownloadImageTask;
 import com.example.biitdigitallibrarysystem.models.LibraryBook;
 import com.example.biitdigitallibrarysystem.models.PdfDownloader;
-import com.example.biitdigitallibrarysystem.teacherActivities.CoursesActivity;
 import com.example.biitdigitallibrarysystem.teacherActivities.TableOFContent;
-import com.example.biitdigitallibrarysystem.teacherActivities.Teacher_dashboard;
-import com.example.biitdigitallibrarysystem.teacherActivities.WeeksActivity;
 
 import java.util.ArrayList;
 
