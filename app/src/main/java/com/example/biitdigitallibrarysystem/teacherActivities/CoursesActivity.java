@@ -29,15 +29,17 @@ import retrofit2.Retrofit;
 
 public class CoursesActivity extends AppCompatActivity {
     RecyclerView rv_course;
-    ArrayList<CoursesClassModel> list ;
-    CourseTAdapter adapter ;
+    ArrayList<CoursesClassModel> list;
+    CourseTAdapter adapter;
     CoursesClassModel coursesClassModel;
     JsonArray jsonArray;
 
     String name;
-    int cid = 0 ;
+    int cid = 0;
     int ttid;
-    JsonObject jsonObject=null;
+    public static int id;
+    JsonObject jsonObject = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +48,7 @@ public class CoursesActivity extends AppCompatActivity {
         jsonArray = new JsonArray();
         list = new ArrayList<>();
         cid = MainActivity.mGetUserID();
-        ttid=MainActivity.tid;
+        ttid = MainActivity.tid;
         rv_course = findViewById(R.id.rvCourses);
         Retrofit client = APIClient.getClient();
         Endpoint endpoint = client.create(Endpoint.class);
@@ -60,13 +62,13 @@ public class CoursesActivity extends AppCompatActivity {
                     for (int i = 0; i < Objects.requireNonNull(jsonArray).size(); i++) {
                         coursesClassModel = new CoursesClassModel();
                         jsonObject = jsonArray.get(i).getAsJsonObject();
-                        int id=jsonObject.get("cid").getAsInt();
-                        String name=jsonObject.get("name").getAsString();
+                        id = jsonObject.get("cid").getAsInt();
+                        String name = jsonObject.get("name").getAsString();
                         coursesClassModel.setcid((id));
                         coursesClassModel.setname(name);
                         list.add(coursesClassModel);
                     }
-                    adapter = new CourseTAdapter(CoursesActivity.this , list);
+                    adapter = new CourseTAdapter(CoursesActivity.this, list);
                     rv_course.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     rv_course.setAdapter(adapter);
                 } else {
@@ -84,16 +86,7 @@ public class CoursesActivity extends AppCompatActivity {
 
 
     }
-    }
-
-
-
-
-
-
-
-
-
+}
 
 
 //        rv_course = findViewById(R.id.rvCourses);

@@ -19,13 +19,7 @@
         android:theme="@style/Theme.BIITDigitalLibrarySystem"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity
-            android:name=".Student_LibraryBooks"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
         <activity
             android:name=".teacherActivities.MyBookTeacher"
             android:exported="false">

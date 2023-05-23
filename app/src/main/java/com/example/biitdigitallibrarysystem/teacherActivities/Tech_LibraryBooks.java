@@ -2,6 +2,7 @@ package com.example.biitdigitallibrarysystem.teacherActivities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +18,7 @@ import com.example.biitdigitallibrarysystem.apiServices.Endpoint;
 import com.example.biitdigitallibrarysystem.models.Bookscreen;
 import com.example.biitdigitallibrarysystem.models.LibraryBook;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.JsonArray;
 
 import java.util.ArrayList;
 
@@ -28,14 +30,14 @@ import retrofit2.Retrofit;
 public class Tech_LibraryBooks extends AppCompatActivity {
     RecyclerView librarybooks;
 
+
     LibraryBooksAdapter booksAdapter;
-    ArrayList<LibraryBook> list = new ArrayList<>();
+    ArrayList<LibraryBook> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.books);
-
         ArrayList<Bookscreen> books = new ArrayList<>();
         librarybooks=findViewById(R.id.rv_Librarybooks);
         Retrofit retrofit = APIClient.getClient();
@@ -45,11 +47,14 @@ public class Tech_LibraryBooks extends AppCompatActivity {
             public void onResponse(@NonNull Call<ArrayList<LibraryBook>> call, @NonNull Response<ArrayList<LibraryBook>> response) {
                 if(response.isSuccessful())
                 {
+                    list = new ArrayList<>();
+                    list.clear();
                     list = response.body();
                     librarybooks.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     booksAdapter = new LibraryBooksAdapter(Tech_LibraryBooks.this , list);
                     librarybooks.setAdapter(booksAdapter);
                     librarybooks.setHasFixedSize(true);
+
                 }
                 else
                 {
@@ -62,6 +67,46 @@ public class Tech_LibraryBooks extends AppCompatActivity {
                 Toast.makeText(Tech_LibraryBooks.this, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        SearchView searchView = findViewById(R.id.searchViewLibraryBooks);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Retrofit retrofit1 = APIClient.getClient();
+                Endpoint endpoint = retrofit.create(Endpoint.class);
+                Toast.makeText(getApplicationContext(),"Query: "+searchView.getQuery().toString(),Toast.LENGTH_LONG).show();
+                endpoint.SearchLibarryBook(searchView.getQuery().toString()).enqueue(new Callback<ArrayList<LibraryBook>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<LibraryBook>> call, Response<ArrayList<LibraryBook>> response) {
+                        if(response.isSuccessful())
+                        {
+                            list = new ArrayList<>();
+                            list.clear();
+                            list = response.body();
+                            librarybooks.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                            booksAdapter = new LibraryBooksAdapter(Tech_LibraryBooks.this , list);
+                            librarybooks.setAdapter(booksAdapter);
+                            librarybooks.setHasFixedSize(true);
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(),"Error: "+response.code(),Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<LibraryBook>> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_LONG).show();
+                    }
+                });
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
 
 
     }

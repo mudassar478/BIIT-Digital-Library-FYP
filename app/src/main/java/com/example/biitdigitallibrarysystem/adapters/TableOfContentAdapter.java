@@ -41,8 +41,6 @@ public class TableOfContentAdapter extends RecyclerView.Adapter<TableOfContentAd
         holder.txtViewTOC.setText(""+tableOFContent.getKeywords());
 
 
-
-
     }
 
 

@@ -168,6 +168,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:backgroundTint="@color/primary"
+                    android:id="@+id/btn_uploadFile"
                     android:text="Choose File:" />
 
                 <TextView
@@ -175,6 +176,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:hint="file name "
+                    android:id="@+id/text_view_fileName"
                     android:textSize="16dp" />
 
             </LinearLayout>
@@ -190,6 +192,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:backgroundTint="@color/primary"
+                    android:id="@+id/btn_uploadImage"
                     android:text="Choose Image:" />
 
                 <TextView
@@ -197,6 +200,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:hint="upload image of book "
+                    android:id="@+id/text_view_imageName"
                     android:textSize="16dp" />
 
             </LinearLayout>
@@ -209,6 +213,7 @@
                 android:text="Add Table Of Content"
                 android:textColor="@color/primary"
                 android:textSize="20dp"
+
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -289,8 +294,14 @@
                     android:id="@+id/edtKeyWordsUploadBook"
                     android:textSize="16dp" />
 
-            </LinearLayout>
 
+            </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                android:background="@color/primary"
+                android:id="@+id/btn_addTableOfContent"/>
             <Button
                 android:id="@+id/btnUploadBookFinal"
                 android:layout_width="wrap_content"

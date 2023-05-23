@@ -14,24 +14,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.biitdigitallibrarysystem.R;
 import com.example.biitdigitallibrarysystem.models.Bookscreen;
+import com.example.biitdigitallibrarysystem.models.LessonPlanModel;
 import com.example.biitdigitallibrarysystem.teacherActivities.LessonPlanActivity;
 import com.example.biitdigitallibrarysystem.teacherActivities.ReferencesAndLinks;
 import com.example.biitdigitallibrarysystem.teacherActivities.UploadLessonPlanActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LessonPlanAdapter extends RecyclerView.Adapter<LessonPlanAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<Bookscreen> lesson;
+    ArrayList<LessonPlanModel> lessonPlanModelList;
 
-    public LessonPlanAdapter(Context context, ArrayList<Bookscreen> lesson) {
+    public LessonPlanAdapter(Context context, ArrayList<LessonPlanModel> lessonPlanModelList) {
         this.context = context;
-        this.lesson = lesson;
+        this.lessonPlanModelList = lessonPlanModelList;
     }
     @NonNull
     @Override
-    public LessonPlanAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public LessonPlanAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.rv_lesson_plan, parent, false);
         return new ViewHolder(view);
 
@@ -39,8 +41,8 @@ public class LessonPlanAdapter extends RecyclerView.Adapter<LessonPlanAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull LessonPlanAdapter.ViewHolder holder, int position) {
-        Bookscreen obj = lesson.get(position);
-        holder.filename.setText(obj.getBooks());
+        LessonPlanModel lessonPlanModel = lessonPlanModelList.get(position);
+        holder.filename.setText(lessonPlanModel.getPath());
 
         holder.button2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +62,7 @@ public class LessonPlanAdapter extends RecyclerView.Adapter<LessonPlanAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return lesson.size();
+        return lessonPlanModelList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

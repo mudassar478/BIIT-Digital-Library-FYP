@@ -60,6 +60,7 @@ public class CourseTAdapter extends RecyclerView.Adapter<CourseTAdapter.CourseHo
             public void onClick(View view) {
                 Intent intent = new Intent(context, WeeksActivity.class);
                 intent.putExtra("cid", list.get(holder.getAdapterPosition()).getcid());
+               // intent.putExtra("ttid", list.get(holder.getAdapterPosition()).);
                 context.startActivity(intent);
             }
         });
