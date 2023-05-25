@@ -16,12 +16,15 @@ import com.example.biitdigitallibrarysystem.models.SectionsInfo;
 import com.example.biitdigitallibrarysystem.models.StudentLogModel;
 import com.example.biitdigitallibrarysystem.teacherActivities.EnrollStudents;
 import com.example.biitdigitallibrarysystem.teacherActivities.StudentLogs;
+import com.example.biitdigitallibrarysystem.teacherActivities.WeeksActivity;
 
 import java.util.ArrayList;
 
 public class StudentLogAdapter extends RecyclerView.Adapter<StudentLogAdapter.StudentLogsHolder> {
     Context context;
     ArrayList<StudentLogModel> Sections;
+    public static int tid;
+    public static String sectionid;
 
     public StudentLogAdapter(Context context, ArrayList<StudentLogModel> sections) {
         this.context = context;
@@ -40,6 +43,16 @@ public class StudentLogAdapter extends RecyclerView.Adapter<StudentLogAdapter.St
         StudentLogModel object = Sections.get(position);
 //        holder.tid.setText(object.gettid()+"");
         holder.Section.setText(object.getsections());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, EnrollStudents.class);
+                tid = Sections.get(holder.getAdapterPosition()).gettid();
+                sectionid = Sections.get(holder.getAdapterPosition()).getsections();
+
+                context.startActivity(intent);
+            }
+        });
 
 
     }
@@ -57,13 +70,13 @@ public class StudentLogAdapter extends RecyclerView.Adapter<StudentLogAdapter.St
             super(itemView);
             tid=itemView.findViewById(R.id.tid);
             Section = itemView.findViewById(R.id.rv_section);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent=new Intent(context, EnrollStudents.class);
-                    context.startActivity(intent);
-                }
-            });
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Intent intent=new Intent(context, EnrollStudents.class);
+//                    context.startActivity(intent);
+//                }
+//            });
         }
 
     }

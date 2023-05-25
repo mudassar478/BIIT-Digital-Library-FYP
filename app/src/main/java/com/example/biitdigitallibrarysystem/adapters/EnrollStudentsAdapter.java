@@ -11,18 +11,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.biitdigitallibrarysystem.R;
-import com.example.biitdigitallibrarysystem.models.Bookscreen;
+import com.example.biitdigitallibrarysystem.models.EnrollStudent_Model;
 import com.example.biitdigitallibrarysystem.teacherActivities.TimeSpentHistory;
 
 import java.util.ArrayList;
 
 public class EnrollStudentsAdapter extends RecyclerView.Adapter<EnrollStudentsAdapter.ViweHolder> {
     Context context;
-    ArrayList<Bookscreen> enrollstudents;
+    ArrayList<EnrollStudent_Model> Enrollstudentslist;
 
-    public EnrollStudentsAdapter(Context context, ArrayList<Bookscreen> enrollstudents) {
+    public EnrollStudentsAdapter(Context context, ArrayList<EnrollStudent_Model> enrollstudentslist) {
         this.context = context;
-        this.enrollstudents = enrollstudents;
+        this.Enrollstudentslist = enrollstudentslist;
     }
 
     @NonNull
@@ -34,27 +34,32 @@ public class EnrollStudentsAdapter extends RecyclerView.Adapter<EnrollStudentsAd
 
     @Override
     public void onBindViewHolder(@NonNull EnrollStudentsAdapter.ViweHolder holder, int position) {
-        Bookscreen obj = enrollstudents.get(position);
-        holder.stdname.setText(obj.getBooks());
-        holder.stdregno.setText(obj.getArid());
+
+        EnrollStudent_Model object = Enrollstudentslist.get(position);
+
+
+        holder.stdregno.setText(object.getReg_no());
+        holder.stdname.setText(object.getName());
 
     }
 
     @Override
     public int getItemCount() {
-        return enrollstudents.size();
+        return Enrollstudentslist.size();
     }
 
     public class ViweHolder extends RecyclerView.ViewHolder {
-        TextView stdname,stdregno;
+        TextView Enrollstudentlist, stdname, stdregno;
+
         public ViweHolder(@NonNull View itemView) {
             super(itemView);
-            stdregno=itemView.findViewById(R.id.stdRegNo);
-            stdname=itemView.findViewById(R.id.stdName);
+            stdregno = itemView.findViewById(R.id.stdRegNo);
+            stdname = itemView.findViewById(R.id.stdName);
+            Enrollstudentlist = itemView.findViewById(R.id.rv_enrollStudents);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent=new Intent(context, TimeSpentHistory.class);
+                    Intent intent = new Intent(context, TimeSpentHistory.class);
                     context.startActivity(intent);
                 }
             });

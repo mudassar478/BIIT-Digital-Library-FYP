@@ -3,6 +3,7 @@ package com.example.biitdigitallibrarysystem.models;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.biitdigitallibrarysystem.adapters.LessonPlanAdapter;
+import com.example.biitdigitallibrarysystem.teacherActivities.LessonPlanActivity;
 
 public class LessonPlanModel {
 
@@ -12,7 +13,7 @@ public class LessonPlanModel {
 
     public LessonPlanModel(){
     }
-    
+
     public LessonPlanModel (int lid, int tid, int cid, int page_no, String title, String path, String week)
     {
         this.lid= lid;

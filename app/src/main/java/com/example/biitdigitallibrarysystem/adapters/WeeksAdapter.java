@@ -25,7 +25,6 @@ import java.util.List;
 public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.ViewHolder> {
     Context context;
     private List<String> items;
-
     public WeeksAdapter(Context context, List<String> items) {
         this.context = context;
         this.items = items;
@@ -43,6 +42,7 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.ViewHolder> 
 
         String item = items.get(position);
         holder.weeks.setText(item);
+
     }
 
     @Override

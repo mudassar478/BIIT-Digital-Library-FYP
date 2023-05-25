@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.biitdigitallibrarysystem.GlobalData;
 import com.example.biitdigitallibrarysystem.R;
 import com.example.biitdigitallibrarysystem.models.CoursesClassModel;
 import com.example.biitdigitallibrarysystem.teacherActivities.LessonPlanActivity;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 public class CourseTAdapter extends RecyclerView.Adapter<CourseTAdapter.CourseHolder> {
     Context context;
     ArrayList<CoursesClassModel> list;
+    public static int idc;
 
     @Override
     public void setHasStableIds(boolean hasStableIds) {
@@ -50,7 +52,8 @@ public class CourseTAdapter extends RecyclerView.Adapter<CourseTAdapter.CourseHo
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, WeeksActivity.class);
-                intent.putExtra("cid", list.get(holder.getAdapterPosition()).getcid());
+                idc = list.get(holder.getAdapterPosition()).getcid();
+
                 context.startActivity(intent);
             }
         });
@@ -59,8 +62,9 @@ public class CourseTAdapter extends RecyclerView.Adapter<CourseTAdapter.CourseHo
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, WeeksActivity.class);
+                GlobalData.cid = list.get(holder.getAdapterPosition()).getcid();
                 intent.putExtra("cid", list.get(holder.getAdapterPosition()).getcid());
-               // intent.putExtra("ttid", list.get(holder.getAdapterPosition()).);
+                // intent.putExtra("ttid", list.get(holder.getAdapterPosition()).);
                 context.startActivity(intent);
             }
         });

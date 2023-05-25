@@ -5,23 +5,11 @@ import com.google.gson.annotations.SerializedName;
 public class WeeksModel {
 
     private int lid;
-
-
     private int cid;
-
-
     private int tid;
-
-
     private String week;
-
-
     private String title;
-
-
     private String path;
-
-
     public int getLid() {
         return lid;
     }

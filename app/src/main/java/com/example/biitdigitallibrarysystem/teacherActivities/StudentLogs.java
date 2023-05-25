@@ -35,7 +35,7 @@ public class StudentLogs extends AppCompatActivity {
     ArrayList<StudentLogModel> list ;
     StudentLogModel studentLogModel;
     JsonArray jsonArray;
-
+public static String section;
     String name;
     int ttid = 0 ;
     JsonObject jsonObject=null;
@@ -65,10 +65,8 @@ public class StudentLogs extends AppCompatActivity {
                     for (int i = 0; i < Objects.requireNonNull(jsonArray).size(); i++) {
                         studentLogModel = new StudentLogModel();
                         jsonObject = jsonArray.get(i).getAsJsonObject();
-//                        int id=jsonObject.get("tid").getAsInt();
-                        String sections=jsonObject.get("section").getAsString();
-//                        studentLogModel.settid((id));
-                        studentLogModel.setsections(sections);
+                         section=jsonObject.get("section").getAsString();
+                        studentLogModel.setsections(section);
                         list.add(studentLogModel);
                     }
                     adapter = new StudentLogAdapter(StudentLogs.this , list);

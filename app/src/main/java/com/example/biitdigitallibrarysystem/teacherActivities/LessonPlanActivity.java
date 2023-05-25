@@ -39,7 +39,7 @@ public class LessonPlanActivity extends AppCompatActivity {
 
     @SuppressLint("MissingInflatedId")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
 //        super.onCreate(savedInstanceState);
 //        setContentView(R.layout.lesson_plan);
 //        ArrayList<Bookscreen> lesson = new ArrayList<>();
@@ -55,63 +55,46 @@ public class LessonPlanActivity extends AppCompatActivity {
 //        rv_lessonplan.setAdapter(lessonPlanAdapter);
         {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.table_ofcontent);
+            setContentView(R.layout.lesson_plan);
 
+            Bundle extras = getIntent().getExtras();
+            String cid = extras.getString("cid").toString();
+            String tid = extras.getString("tid","abc").toString();
+            String weeks = extras.getString("week","def").toString();
+//            Toast.makeText(getApplicationContext(),"weeks: "+weeks,Toast.LENGTH_LONG).show();
             jsonArray = new JsonArray();
             Retrofit retrofit = APIClient.getClient();
             rv_lessonplan = findViewById(R.id.rv_LessonPlan);
             Endpoint endpoint = retrofit.create(Endpoint.class);
-            endpoint.TeacherFetchTableofContent(com.example.biitdigitallibrarysystem.teacherActivities.LessonPlanActivity.cid).enqueue(new Callback<JsonArray>() {
+            endpoint.TeacherFetchLessonPlanAgainstWeek(Integer.parseInt(cid),Integer.parseInt(tid),weeks).enqueue(new Callback<ArrayList<LessonPlanModel>>() {
                 @Override
-                public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
-                    if(response.isSuccessful()) {
-                        jsonArray = response.body();
-                        for (int i = 0; i < Objects.requireNonNull(jsonArray).size(); i++) {
-                            lessonPlanModel = new LessonPlanModel();
-                            jsonObject = jsonArray.get(i).getAsJsonObject();
-                            int lid,tid,cid,page_no;
-                            String title, path, week;
-                            title = jsonObject.get("title").getAsString();
-                            path = jsonObject.get("path").getAsString();
-                            week = jsonObject.get("week").getAsString();
-                            lid = jsonObject.get("lid").getAsInt();
-                            tid = jsonObject.get("tid").getAsInt();
-                            cid = jsonObject.get("cid").getAsInt();
-                            page_no = jsonObject.get("page_no").getAsInt();
-
-                            lessonPlanModel.setLid(lid);
-                            lessonPlanModel.setCid(cid);
-                            lessonPlanModel.setTid(tid);
-                            lessonPlanModel.setPage_no(page_no);
-                            lessonPlanModel.setLid(lid);
-                            lessonPlanModel.setLid(lid);
-                            lessonPlanModel.setTitle(title);
-                            lessonPlanModel.setPath(path);
-                            lessonPlanModel.setWeek(week);
-
-
-                            list.add(lessonPlanModel);
-
-                        }
-                        TableOfContentAdapter tableOfContentAdapter=new TableOfContentAdapter(com.example.biitdigitallibrarysystem.teacherActivities.LessonPlanActivity.this,list);
-                        lessonPlanModel.setAdapter(lessonPlanAdapter);
-                        lessonPlanModel.setLayoutManager(new LinearLayoutManager(com.example.biitdigitallibrarysystem.teacherActivities.LessonPlanActivity.this));
-                    }
-
-                    else
+                public void onResponse(Call<ArrayList<LessonPlanModel>> call, Response<ArrayList<LessonPlanModel>> response) {
+                    if (response.isSuccessful())
                     {
-                        Toast.makeText(com.example.biitdigitallibrarysystem.teacherActivities.LessonPlanActivity.this, ""+response.message(), Toast.LENGTH_SHORT).show();
-                    }
+                        if(response.body()!=null) {
+                            //Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_LONG).show();
+                            list.clear();
+                            list.addAll(response.body());
 
+                            lessonPlanAdapter = new LessonPlanAdapter(getApplicationContext(), list);
+                            rv_lessonplan = findViewById(R.id.rv_LessonPlan);
+                            rv_lessonplan.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                            rv_lessonplan.setAdapter(lessonPlanAdapter);
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(), "No Lesson Plans Found!", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),"Error: "+response.code(),Toast.LENGTH_LONG).show();
+                    }
                 }
 
                 @Override
-                public void onFailure(Call<JsonArray> call, Throwable t) {
-                    Toast.makeText(com.example.biitdigitallibrarysystem.teacherActivities.LessonPlanActivity.this, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
-
+                public void onFailure(Call<ArrayList<LessonPlanModel>> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_LONG).show();
                 }
             });
 
         }
     }
-}

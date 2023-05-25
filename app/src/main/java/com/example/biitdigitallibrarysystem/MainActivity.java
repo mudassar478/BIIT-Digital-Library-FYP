@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                                     // userid = list.get(0).getSid();
                                     Intent intent = new Intent(MainActivity.this, Teacher_dashboard.class);
                                     intent.putExtra("TName", userName);
+                                    GlobalData.tid = tid;
                                     startActivity(intent);
                                     Toast.makeText(MainActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                                 }
