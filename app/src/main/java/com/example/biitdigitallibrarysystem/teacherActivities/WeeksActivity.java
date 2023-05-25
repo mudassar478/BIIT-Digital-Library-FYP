@@ -15,12 +15,8 @@ import com.example.biitdigitallibrarysystem.MainActivity;
 import com.example.biitdigitallibrarysystem.R;
 import com.example.biitdigitallibrarysystem.adapters.CourseTAdapter;
 import com.example.biitdigitallibrarysystem.adapters.Weeks1Adapter;
-import com.example.biitdigitallibrarysystem.adapters.WeeksAdapter;
 import com.example.biitdigitallibrarysystem.apiServices.APIClient;
 import com.example.biitdigitallibrarysystem.apiServices.Endpoint;
-import com.example.biitdigitallibrarysystem.models.Item;
-import com.example.biitdigitallibrarysystem.models.WeekNumModel;
-import com.example.biitdigitallibrarysystem.models.WeeksModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -38,9 +34,8 @@ public class WeeksActivity extends AppCompatActivity {
 
     Context context;
     FloatingActionButton fbtn;
-    ArrayList<WeeksModel> list;
-    ArrayList<WeekNumModel> week_list;
-    WeeksAdapter weeksAdapter;
+
+
     int ttid;
     RecyclerView rv_weeks;
 //    JsonArray jsonArray;
@@ -64,8 +59,7 @@ public class WeeksActivity extends AppCompatActivity {
         context = this;
 
         jsonArray = new JsonArray();
-        list = new ArrayList<>();
-        week_list = new ArrayList<>();
+
 
 
         rv_weeks = findViewById(R.id.rv_week);

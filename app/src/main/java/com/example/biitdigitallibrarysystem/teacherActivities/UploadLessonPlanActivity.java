@@ -2,6 +2,7 @@ package com.example.biitdigitallibrarysystem.teacherActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,7 @@ public class UploadLessonPlanActivity extends AppCompatActivity {
     Button btnsave , btnchoose ;
     int tid , cid ;
     String title , week;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,7 @@ public class UploadLessonPlanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
             }
         });
 
@@ -44,7 +47,8 @@ public class UploadLessonPlanActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Retrofit retrofit = APIClient.getClient();
                 Endpoint endpoint = retrofit.create(Endpoint.class);
-                endpoint.teacherUpload(tid , cid , title , week).enqueue(new Callback<ResponseBody>() {
+                endpoint.teacherUpload(tid , cid , title , week).enqueue(new Callback<ResponseBody>()
+                {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if(response.isSuccessful())

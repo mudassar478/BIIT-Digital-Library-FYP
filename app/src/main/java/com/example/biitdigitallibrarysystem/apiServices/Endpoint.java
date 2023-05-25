@@ -63,7 +63,7 @@ public interface Endpoint {
     Call<JsonArray> TeacherFetchTableofContent(@Query("bid") int bid);
 
     @GET("TeacherCourse/TeacherFetchLessonPlanAgainstWeek")
-    Call<ArrayList<LessonPlanModel>> TeacherFetchLessonPlanAgainstWeek(@Query("cid") int cid, @Query("tid") int tid, @Query("week") String week);
+    Call<JsonArray> TeacherFetchLessonPlanAgainstWeek(@Query("cid") int cid, @Query("tid") int tid, @Query("week") String week);
 
     @GET("TeacherCourse/TeacherDeleteLessonPlan")
     Call<ResponseBody> TeacherDeleteLessonPlan(@Query("lid") int lid);

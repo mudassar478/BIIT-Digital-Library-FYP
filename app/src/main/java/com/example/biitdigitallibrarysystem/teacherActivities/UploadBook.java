@@ -39,6 +39,8 @@ public class UploadBook extends AppCompatActivity {
     final int GALLERY_REQUEST_CODE = 2;
     APIClient client = APIClient.getInstance();
     Endpoint api;
+    boolean chossefile=false;
+    boolean chooseimage=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         binding = UploadBookBinding.inflate(getLayoutInflater());
@@ -61,6 +63,7 @@ public class UploadBook extends AppCompatActivity {
         binding.btnUploadFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                chossefile=true;
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT,
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
@@ -70,6 +73,7 @@ public class UploadBook extends AppCompatActivity {
         binding.btnUploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                chooseimage=true;
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT,
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
@@ -150,9 +154,19 @@ public class UploadBook extends AppCompatActivity {
                         Uri imageUri = data.getClipData().getItemAt(i).getUri();
                         // Handle each image URI as needed
                         try {
-                            MultipartBody.Part image =
-                                    api.prepareFilePart("image", imageUri, getApplicationContext());
-                            imageList.add(image);
+                            if(chooseimage) {
+                                MultipartBody.Part image =
+                                        api.prepareFilePart("image", imageUri, getApplicationContext());
+                                imageList.add(image);
+                                chooseimage=false;
+                            }
+                            else if(chossefile){
+                                MultipartBody.Part image =
+                                        api.prepareFilePart("book", imageUri, getApplicationContext());
+                                fileList.add(image);
+                                chossefile=false;
+
+                            }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -163,10 +177,19 @@ public class UploadBook extends AppCompatActivity {
 
 //                    binding.imageBook.setImageURI(imageUri);
                     try {
+                        if(chooseimage) {
+                            MultipartBody.Part image =
+                                    api.prepareFilePart("image", imageUri, getApplicationContext());
+                            imageList.add(image);
+                            chooseimage=false;
+                        }
+                        else if(chossefile){
+                            MultipartBody.Part image =
+                                    api.prepareFilePart("book", imageUri, getApplicationContext());
+                            imageList.add(image);
+                            chossefile=false;
 
-                        MultipartBody.Part image =
-                                api.prepareFilePart("image", imageUri,getApplicationContext());
-                        imageList.add(image);
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

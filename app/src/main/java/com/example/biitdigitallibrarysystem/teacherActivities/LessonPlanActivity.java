@@ -1,5 +1,6 @@
 package com.example.biitdigitallibrarysystem.teacherActivities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,13 +9,18 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.biitdigitallibrarysystem.MainActivity;
 import com.example.biitdigitallibrarysystem.R;
+import com.example.biitdigitallibrarysystem.adapters.CourseTAdapter;
 import com.example.biitdigitallibrarysystem.adapters.LessonPlanAdapter;
+import com.example.biitdigitallibrarysystem.adapters.StudentLogAdapter;
 import com.example.biitdigitallibrarysystem.adapters.TableOfContentAdapter;
+import com.example.biitdigitallibrarysystem.adapters.Weeks1Adapter;
 import com.example.biitdigitallibrarysystem.apiServices.APIClient;
 import com.example.biitdigitallibrarysystem.apiServices.Endpoint;
 import com.example.biitdigitallibrarysystem.models.Bookscreen;
 import com.example.biitdigitallibrarysystem.models.LessonPlanModel;
+import com.example.biitdigitallibrarysystem.models.StudentLogModel;
 import com.example.biitdigitallibrarysystem.models.TableOfContentModel;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -29,72 +35,67 @@ import retrofit2.Retrofit;
 
 public class LessonPlanActivity extends AppCompatActivity {
     RecyclerView rv_lessonplan;
-    LessonPlanAdapter lessonPlanAdapter;
+    LessonPlanAdapter adapter;
 
-    ArrayList<LessonPlanModel> list= new ArrayList<>();
+    ArrayList<LessonPlanModel> list;
     LessonPlanModel lessonPlanModel;
-    JsonObject jsonObject=null;
+    JsonObject jsonObject = null;
     JsonArray jsonArray;
     public static int cid;
+    String title, path;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.lesson_plan);
-//        ArrayList<Bookscreen> lesson = new ArrayList<>();
-//        rv_lessonplan=findViewById(R.id.rv_LessonPlan);
-//        lesson.add(new Bookscreen("Lesson Plan 1"));
-//        lesson.add(new Bookscreen("Lesson Plan 2"));
-//        lesson.add(new Bookscreen("Lesson Plan 3"));
-//        lesson.add(new Bookscreen("Lesson Plan 4"));
-//
-//
-//        lessonPlanAdapter = new LessonPlanAdapter(this , lesson);
-//        rv_lessonplan.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-//        rv_lessonplan.setAdapter(lessonPlanAdapter);
-        {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.lesson_plan);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.lesson_plan);
 
-            Bundle extras = getIntent().getExtras();
-            String cid = extras.getString("cid").toString();
-            String tid = extras.getString("tid","abc").toString();
-            String weeks = extras.getString("week","def").toString();
-//            Toast.makeText(getApplicationContext(),"weeks: "+weeks,Toast.LENGTH_LONG).show();
-            jsonArray = new JsonArray();
-            Retrofit retrofit = APIClient.getClient();
-            rv_lessonplan = findViewById(R.id.rv_LessonPlan);
-            Endpoint endpoint = retrofit.create(Endpoint.class);
-            endpoint.TeacherFetchLessonPlanAgainstWeek(Integer.parseInt(cid),Integer.parseInt(tid),weeks).enqueue(new Callback<ArrayList<LessonPlanModel>>() {
-                @Override
-                public void onResponse(Call<ArrayList<LessonPlanModel>> call, Response<ArrayList<LessonPlanModel>> response) {
-                    if (response.isSuccessful())
-                    {
-                        if(response.body()!=null) {
-                            //Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_LONG).show();
-                            list.clear();
-                            list.addAll(response.body());
+        Bundle extras = getIntent().getExtras();
 
-                            lessonPlanAdapter = new LessonPlanAdapter(getApplicationContext(), list);
-                            rv_lessonplan = findViewById(R.id.rv_LessonPlan);
-                            rv_lessonplan.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                            rv_lessonplan.setAdapter(lessonPlanAdapter);
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(), "No Lesson Plans Found!", Toast.LENGTH_LONG).show();
-                        }
+        jsonArray = new JsonArray();
+        Retrofit retrofit = APIClient.getClient();
+        rv_lessonplan = findViewById(R.id.rv_LessonPlan);
+
+        int courseId = CourseTAdapter.idc;
+        int teacherid = MainActivity.tid;
+        String weekid = Weeks1Adapter.weekid;
+        jsonArray = new JsonArray();
+        list = new ArrayList<>();
+        Retrofit client = APIClient.getClient();
+        Endpoint endpoint = client.create(Endpoint.class);
+        endpoint.TeacherFetchLessonPlanAgainstWeek(courseId, teacherid, weekid).enqueue(new Callback<JsonArray>() {
+            @Override
+            public void onResponse(@NonNull Call<JsonArray> call, @NonNull Response<JsonArray> response) {
+
+                if (response.isSuccessful()) {
+
+                    jsonArray = response.body();
+                    for (int i = 0; i < Objects.requireNonNull(jsonArray).size(); i++) {
+                        lessonPlanModel = new LessonPlanModel();
+                        jsonObject = jsonArray.get(i).getAsJsonObject();
+                        title = jsonObject.get("title").getAsString();
+                        path = jsonObject.get("path").getAsString();
+                        lessonPlanModel.setTitle(title);
+                        lessonPlanModel.setTitle(path);
+                        list.add(lessonPlanModel);
                     }
-                    else{
-                        Toast.makeText(getApplicationContext(),"Error: "+response.code(),Toast.LENGTH_LONG).show();
-                    }
+                    adapter = new LessonPlanAdapter(LessonPlanActivity.this, list);
+                    rv_lessonplan.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    rv_lessonplan.setAdapter(adapter);
+                } else {
+                    Toast.makeText(LessonPlanActivity.this, "" + response.message(), Toast.LENGTH_SHORT).show();
                 }
+            }
 
-                @Override
-                public void onFailure(Call<ArrayList<LessonPlanModel>> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_LONG).show();
-                }
-            });
+            @Override
+            public void onFailure(Call<JsonArray> call, Throwable t) {
 
-        }
+
+                Toast.makeText(LessonPlanActivity.this, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
+}

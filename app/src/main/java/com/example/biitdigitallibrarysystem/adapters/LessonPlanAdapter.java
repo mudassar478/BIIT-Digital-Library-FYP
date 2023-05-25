@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.biitdigitallibrarysystem.R;
 import com.example.biitdigitallibrarysystem.apiServices.APIClient;
 import com.example.biitdigitallibrarysystem.apiServices.Endpoint;
+import com.example.biitdigitallibrarysystem.models.EnrollStudent_Model;
 import com.example.biitdigitallibrarysystem.models.LessonPlanModel;
 import com.example.biitdigitallibrarysystem.teacherActivities.ReferencesAndLinks;
 import com.example.biitdigitallibrarysystem.teacherActivities.UploadLessonPlanActivity;
@@ -30,12 +31,14 @@ import retrofit2.Retrofit;
 public class LessonPlanAdapter extends RecyclerView.Adapter<LessonPlanAdapter.ViewHolder> {
 
     Context context;
+
     ArrayList<LessonPlanModel> lessonPlanModelList;
 
     public LessonPlanAdapter(Context context, ArrayList<LessonPlanModel> lessonPlanModelList) {
         this.context = context;
         this.lessonPlanModelList = lessonPlanModelList;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
@@ -46,8 +49,10 @@ public class LessonPlanAdapter extends RecyclerView.Adapter<LessonPlanAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull LessonPlanAdapter.ViewHolder holder, int position) {
-        LessonPlanModel lessonPlanModel = lessonPlanModelList.get(position);
-        holder.filename.setText(lessonPlanModel.getPath());
+        LessonPlanModel object = lessonPlanModelList.get(position);
+//        holder.filename.setText(lessonPlanModel.getPath());
+
+        holder.filename.setText(object.getTitle());
 
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +64,7 @@ public class LessonPlanAdapter extends RecyclerView.Adapter<LessonPlanAdapter.Vi
         holder.btnRefrenece.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(context, ReferencesAndLinks.class);
+                Intent intent=new Intent(context,ReferencesAndLinks.class);
                 context.startActivity(intent);
             }
         });
@@ -68,7 +73,7 @@ public class LessonPlanAdapter extends RecyclerView.Adapter<LessonPlanAdapter.Vi
             public void onClick(View view) {
                 Retrofit retrofit= APIClient.getClient();
                 Endpoint endpoint= retrofit.create(Endpoint.class);
-                endpoint.TeacherDeleteLessonPlan(lessonPlanModel.getLid()).enqueue(new Callback<ResponseBody>() {
+                endpoint.TeacherDeleteLessonPlan(object.getLid()).enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful()){
