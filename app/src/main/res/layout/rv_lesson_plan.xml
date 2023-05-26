@@ -29,6 +29,11 @@
         android:layout_marginTop="8dp"
         android:textSize="16dp"
         />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/text_view_lid"
+        android:visibility="invisible"/>
     <ImageButton
         android:id="@+id/refrences_lessonplan"
         android:layout_width="wrap_content"

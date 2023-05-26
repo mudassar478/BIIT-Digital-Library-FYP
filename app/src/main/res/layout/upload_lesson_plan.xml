@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         >
         <TextView
             android:layout_width="wrap_content"
@@ -28,7 +28,7 @@
             android:layout_marginLeft="10dp"
             android:textColor="@color/black"
             />
-        <TextView
+        <EditText
             android:id="@+id/txtViewTitle"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         >
         <Button
             android:layout_width="wrap_content"
@@ -67,29 +67,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="15dp">
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/spinnerUploadLesson"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-
-            >
+            android:layout_margin="10dp">
 
         </Spinner>
 
-        <Button
-            android:id="@+id/save_lessonplan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/primary"
-            android:text="Upload" />
+
     </LinearLayout>
 
-
+    <Button
+        android:id="@+id/save_lessonplan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/primary"
+        android:text="Upload" />
 
 
 

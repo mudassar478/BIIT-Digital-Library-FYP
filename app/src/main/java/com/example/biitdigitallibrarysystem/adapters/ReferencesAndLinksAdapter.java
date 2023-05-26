@@ -12,15 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.biitdigitallibrarysystem.R;
 import com.example.biitdigitallibrarysystem.models.Bookscreen;
+import com.example.biitdigitallibrarysystem.models.ReferenceAndLinkModel;
 import com.example.biitdigitallibrarysystem.teacherActivities.ReferencesAndLinks;
 
 import java.util.ArrayList;
 
 public class ReferencesAndLinksAdapter extends RecyclerView.Adapter<ReferencesAndLinksAdapter.ReferenceHolder> {
     Context context;
-    ArrayList<Bookscreen> RefrencesAndLinks;
+    ArrayList<ReferenceAndLinkModel> RefrencesAndLinks;
 
-    public ReferencesAndLinksAdapter(Context context, ArrayList<Bookscreen> RefrencesAndLinks) {
+    public ReferencesAndLinksAdapter(Context context, ArrayList<ReferenceAndLinkModel> RefrencesAndLinks) {
         this.context = context;
         this.RefrencesAndLinks = RefrencesAndLinks;
     }
@@ -35,7 +36,7 @@ public class ReferencesAndLinksAdapter extends RecyclerView.Adapter<ReferencesAn
 
     @Override
     public void onBindViewHolder(@NonNull ReferencesAndLinksAdapter.ReferenceHolder holder, int position) {
-//        Bookscreen obj = RefrencesAndLinks.get(position);
+//        ReferenceAndLinkModel obj = RefrencesAndLinks.get(position);
 //        holder.filename.setText(obj.getBooks());
     }
 
