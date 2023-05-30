@@ -27,8 +27,9 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     public static int userid;
     public static int tid, role;
+    public static int sid;
     public static String loginRole="";
-    private String userName;
+    public static String userName;
     ArrayList<LoginModel> list = new ArrayList<>();
 
     @Override
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
                     String id = binding.etid.getText().toString();
                     String pass = binding.etpassword.getText().toString();
+
                     Retrofit retrofit = APIClient.getClient();
                     Endpoint endpoint = retrofit.create(Endpoint.class);
                     endpoint.UserLogin(id, pass).enqueue(new Callback<LoginModel>() {
@@ -51,24 +53,39 @@ public class MainActivity extends AppCompatActivity {
                             if (response.isSuccessful()) {
 
                                 LoginModel loginModel = response.body();
+                                String role=loginModel.getRole();
                                 tid = loginModel.getTid();
+
+                                sid = loginModel.getSid();
+                              //  Toast.makeText(MainActivity.this,"Student id"+loginModel.getReg_no(),Toast.LENGTH_LONG).show();
+
                                 userName = loginModel.getName();
-                                if (Objects.equals(loginModel.getRole(), "teacher")) {
+                                  if (Objects.equals(loginModel.getRole(), "teacher")) {
                                     loginRole="teacher";
                                     // userid = list.get(0).getSid();
                                     Intent intent = new Intent(MainActivity.this, Teacher_dashboard.class);
                                     intent.putExtra("TName", userName);
+                                    intent.putExtra("tid",tid);
+                                    intent.putExtra("role",role);
                                     GlobalData.tid = tid;
                                     startActivity(intent);
                                     Toast.makeText(MainActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                                 }
                                 if (Objects.equals(loginModel.getRole(), "student")) {
                                     loginRole="student";
+
                                     //userid = list.get(0).getSid();
+
+
                                     Intent intent = new Intent(MainActivity.this, Student_dashboard.class);
                                     intent.putExtra("TName", userName);
                                     intent.putExtra("U_ID",loginModel.getReg_no());
+                                    intent.putExtra("S_ID",loginModel.getSid());
+
                                     startActivity(intent);
+
+
+
                                     Toast.makeText(MainActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                                 }
                             } else {

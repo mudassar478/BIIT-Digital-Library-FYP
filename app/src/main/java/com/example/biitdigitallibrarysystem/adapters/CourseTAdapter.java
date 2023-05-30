@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.biitdigitallibrarysystem.GlobalData;
 import com.example.biitdigitallibrarysystem.R;
 import com.example.biitdigitallibrarysystem.models.CoursesClassModel;
+import com.example.biitdigitallibrarysystem.teacherActivities.CoursesActivity;
 import com.example.biitdigitallibrarysystem.teacherActivities.LessonPlanActivity;
 import com.example.biitdigitallibrarysystem.teacherActivities.Tech_LibraryBooks;
 import com.example.biitdigitallibrarysystem.teacherActivities.WeeksActivity;
@@ -52,7 +53,11 @@ public class CourseTAdapter extends RecyclerView.Adapter<CourseTAdapter.CourseHo
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, WeeksActivity.class);
+                int tid= CoursesActivity.tid;
+                String role=CoursesActivity.role;
                 idc = list.get(holder.getAdapterPosition()).getcid();
+                intent.putExtra("tid",tid);
+                intent.putExtra("role",role);
 
                 context.startActivity(intent);
             }

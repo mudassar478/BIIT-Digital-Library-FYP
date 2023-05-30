@@ -34,7 +34,8 @@ public class WeeksActivity extends AppCompatActivity {
 
     Context context;
     FloatingActionButton fbtn;
-
+    public static int tid;
+    public static String role;
 
     int ttid;
     RecyclerView rv_weeks;
@@ -55,15 +56,18 @@ public class WeeksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weeks);
         ttid = MainActivity.tid;
+        Intent intent = getIntent();
+        role = intent.getStringExtra("role");
+        tid = intent.getIntExtra("tid", 0);
+
 //        jsonArray = new JsonArray();
         context = this;
 
         jsonArray = new JsonArray();
 
 
-
         rv_weeks = findViewById(R.id.rv_week);
-        Intent intent = getIntent();
+
         cid = CourseTAdapter.idc;
 
         Retrofit client = APIClient.getClient();

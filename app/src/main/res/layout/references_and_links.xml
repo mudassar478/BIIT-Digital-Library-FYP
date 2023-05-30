@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:hint="Add text here!!!!"
+        android:id="@+id/referensces_text"
 
 
         />
@@ -38,7 +39,9 @@
         android:text="Save"
         android:backgroundTint="@color/primary"
         android:layout_gravity="center"
+        android:id="@+id/btn_saveRefrences"
         />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

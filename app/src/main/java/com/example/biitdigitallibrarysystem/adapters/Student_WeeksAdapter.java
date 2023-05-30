@@ -2,33 +2,29 @@ package com.example.biitdigitallibrarysystem.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.biitdigitallibrarysystem.R;
+import com.example.biitdigitallibrarysystem.studentActivites.Student_lessonPlan;
 import com.example.biitdigitallibrarysystem.teacherActivities.LessonPlanActivity;
 import com.example.biitdigitallibrarysystem.teacherActivities.WeeksActivity;
 
 import java.util.List;
 
-public class Weeks1Adapter extends RecyclerView.Adapter<Weeks1Adapter.ViewHolder> {
+public class Student_WeeksAdapter extends RecyclerView.Adapter<Student_WeeksAdapter.ViewHolder> {
     private List<String> booksList;
-    private Weeks1Adapter.RecyclerViewClickListener listener;
     Context context;
     public static String weekid;
 
-    public Weeks1Adapter(List<String> booksList, Weeks1Adapter.RecyclerViewClickListener listener, Context context) {
+    public Student_WeeksAdapter(List<String> booksList, Context context) {
         this.booksList = booksList;
-        this.listener = listener;
         this.context = context;
     }
 
@@ -41,7 +37,7 @@ public class Weeks1Adapter extends RecyclerView.Adapter<Weeks1Adapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Weeks1Adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull Student_WeeksAdapter.ViewHolder holder, int position) {
         String item = booksList.get(position);
         holder.weeks.setText(item);
 
@@ -49,12 +45,9 @@ public class Weeks1Adapter extends RecyclerView.Adapter<Weeks1Adapter.ViewHolder
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(context, LessonPlanActivity.class);
-                int tid= WeeksActivity.tid;
-                String role=WeeksActivity.role;
+                Intent intent = new Intent(context, Student_lessonPlan.class);
+
                 weekid = booksList.get(holder.getAdapterPosition());
-                intent.putExtra("tid",tid);
-                intent.putExtra("role",role);
                 context.startActivity(intent);
             }
         });
@@ -85,15 +78,6 @@ public class Weeks1Adapter extends RecyclerView.Adapter<Weeks1Adapter.ViewHolder
 
         }
 
-//        @Override
-//        public void onClick(View view) {
-////            Toast.makeText(view.getContext(), "hhhh",Toast.LENGTH_LONG).show();
-//            Intent intent = new Intent(context, LessonPlanActivity.class);
-//            intent.putExtra("cid",lid.getText().toString());
-//            intent.putExtra("tid",tid.getText().toString());
-//            intent.putExtra("week",weeks.getText().toString());
-//            context.startActivity(intent);
-//        }
     }
 
 }

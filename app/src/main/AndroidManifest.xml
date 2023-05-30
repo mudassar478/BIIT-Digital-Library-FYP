@@ -19,6 +19,20 @@
         android:theme="@style/Theme.BIITDigitalLibrarySystem"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".studentActivites.Student_lessonPlan"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".studentActivites.Week_Student"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
 
         <activity
             android:name=".teacherActivities.MyBookTeacher"

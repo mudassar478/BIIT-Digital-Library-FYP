@@ -15,12 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.biitdigitallibrarysystem.R;
 import com.example.biitdigitallibrarysystem.apiServices.APIClient;
 import com.example.biitdigitallibrarysystem.apiServices.Endpoint;
-import com.example.biitdigitallibrarysystem.models.EnrollStudent_Model;
 import com.example.biitdigitallibrarysystem.models.LessonPlanModel;
 import com.example.biitdigitallibrarysystem.teacherActivities.EditLessonPlan;
 import com.example.biitdigitallibrarysystem.teacherActivities.LessonPlanActivity;
 import com.example.biitdigitallibrarysystem.teacherActivities.ReferencesAndLinks;
-import com.example.biitdigitallibrarysystem.teacherActivities.UploadLessonPlanActivity;
 
 import java.util.ArrayList;
 
@@ -30,14 +28,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class LessonPlanAdapter extends RecyclerView.Adapter<LessonPlanAdapter.ViewHolder> {
+public class StudentLessonPlanAdapter extends RecyclerView.Adapter<StudentLessonPlanAdapter.ViewHolder> {
 
     Context context;
     public static int lid;
 
     ArrayList<LessonPlanModel> lessonPlanModelList;
 
-    public LessonPlanAdapter(Context context, ArrayList<LessonPlanModel> lessonPlanModelList) {
+    public StudentLessonPlanAdapter(Context context, ArrayList<LessonPlanModel> lessonPlanModelList) {
         this.context = context;
         this.lessonPlanModelList = lessonPlanModelList;
     }
@@ -51,7 +49,7 @@ public class LessonPlanAdapter extends RecyclerView.Adapter<LessonPlanAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LessonPlanAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull StudentLessonPlanAdapter.ViewHolder holder, int position) {
         LessonPlanModel object = lessonPlanModelList.get(position);
 //        holder.filename.setText(lessonPlanModel.getPath());
 
@@ -71,7 +69,7 @@ public class LessonPlanAdapter extends RecyclerView.Adapter<LessonPlanAdapter.Vi
             public void onClick(View view) {
                 lid = lessonPlanModelList.get(holder.getAdapterPosition()).getLid();
                 int tid= LessonPlanActivity.tid;
-                 lid=LessonPlanActivity.lid;
+                int lid=LessonPlanActivity.lid;
                 String role= LessonPlanActivity.role;
                 Intent intent=new Intent(context,ReferencesAndLinks.class);
                 intent.putExtra("tid",tid);

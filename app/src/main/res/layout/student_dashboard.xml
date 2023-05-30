@@ -26,17 +26,7 @@
         android:textSize="18dp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tv_Regno"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:gravity="center"
-        android:text="Arid number"
-        android:textColor="@color/primary"
-        android:textSize="18dp"
-        android:textStyle="bold" />
+
 
     <LinearLayout
         android:layout_width="match_parent"

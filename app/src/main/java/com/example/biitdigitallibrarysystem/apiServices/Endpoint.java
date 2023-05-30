@@ -9,6 +9,7 @@ import com.example.biitdigitallibrarysystem.models.FileUtil;
 import com.example.biitdigitallibrarysystem.models.LessonPlanModel;
 import com.example.biitdigitallibrarysystem.models.LibraryBook;
 import com.example.biitdigitallibrarysystem.models.LoginModel;
+import com.example.biitdigitallibrarysystem.models.ReferencesModel;
 import com.example.biitdigitallibrarysystem.models.TableOfContent;
 import com.google.gson.JsonArray;
 
@@ -22,6 +23,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -42,6 +44,8 @@ public interface Endpoint {
     @GET("TeacherCourse/TeacherFetchWeekAgainstCourse")
     Call<List<String>> TeacherFetchWeekAgainstCourse(@Query("cid") int cid, @Query("tid") int tid);
 
+    @GET("StudentCourse/StudentFetchWeekAgainstLessonplan")
+    Call<List<String>> studentFetchWeekAgainstCourse(@Query("cid") int cid, @Query("sid") int sid);
 
     @GET("StudentLogs/FetchSection")
     Call<JsonArray> fetchSection(@Query("tid") int tid);
@@ -56,6 +60,9 @@ public interface Endpoint {
     @GET("TeacherBook/TeacherFetchLibraryBook")
     Call<ArrayList<LibraryBook>> fetchLibraryBooks();
 
+    @GET("TeacherBook/TeacherFetchOwnBooks")
+    Call<ArrayList<LibraryBook>> fetchOwnBooks();
+
     @GET("TeacherBook/SearchLibarryBook")
     Call<ArrayList<LibraryBook>> SearchLibarryBook(@Query("libraryseach") String libraryseach);
 
@@ -65,8 +72,22 @@ public interface Endpoint {
     @GET("TeacherCourse/TeacherFetchLessonPlanAgainstWeek")
     Call<JsonArray> TeacherFetchLessonPlanAgainstWeek(@Query("cid") int cid, @Query("tid") int tid, @Query("week") String week);
 
+    @GET("StudentCourse/StudentFetchLessonplanAgainstWeek")
+    Call<JsonArray> studentFetchLessonPlanAgainstWeek(@Query("cid") int cid, @Query("sid") int sid, @Query("week") String week);
+
+
+    @GET("TeacherCourse/TeacherFetchRefrences")
+    Call<ArrayList<ReferencesModel>> teacherfetchrefrences(@Query("sourceid") int sourceid, @Query("lid") int lid, @Query("sourcename") String sourcename);
+
+
     @GET("TeacherCourse/TeacherDeleteLessonPlan")
     Call<ResponseBody> TeacherDeleteLessonPlan(@Query("lid") int lid);
+
+
+    @POST("TeacherCourse/TeacherAddRefrences")
+    Call<ResponseBody> teacheraddrefrences(@Body ReferencesModel r);
+
+
 
 
     @GET("TeacherCourse/TeacherFetchRefrences")
@@ -105,4 +126,9 @@ public interface Endpoint {
         return description;
 
     }
+
+
+    @GET("StudentCourse/Course")
+    Call<JsonArray> Course(@Query("sid") int sid);
+
 }

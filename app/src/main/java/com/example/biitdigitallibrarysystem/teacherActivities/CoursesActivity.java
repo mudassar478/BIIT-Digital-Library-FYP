@@ -27,24 +27,32 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class CoursesActivity extends AppCompatActivity {
+public class
+CoursesActivity extends AppCompatActivity {
     RecyclerView rv_course;
     ArrayList<CoursesClassModel> list;
     CourseTAdapter adapter;
     CoursesClassModel coursesClassModel;
     JsonArray jsonArray;
+    JsonObject jsonObject = null;
 
     String name;
     int cid = 0;
     int ttid;
     public static int id;
-    JsonObject jsonObject = null;
+    public static int tid;
+    public static String role;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
 
+        Intent intent=getIntent();
+         role=intent.getStringExtra("role");
+         tid=intent.getIntExtra("tid",0);
         jsonArray = new JsonArray();
         list = new ArrayList<>();
         cid = MainActivity.mGetUserID();

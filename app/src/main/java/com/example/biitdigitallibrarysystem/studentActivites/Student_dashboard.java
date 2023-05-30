@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.biitdigitallibrarysystem.R;
 import com.example.biitdigitallibrarysystem.teacherActivities.CoursesActivity;
@@ -26,14 +27,18 @@ public class Student_dashboard extends AppCompatActivity {
         im2=findViewById(R.id.img_std_Books);
         im3=findViewById(R.id.img_std_Bookmarks);
         tv_student=findViewById(R.id.tv_student);
+
         Intent intent = getIntent();
         studentName = intent.getStringExtra("TName");
-        student_id = intent.getIntExtra("U_ID",0);
-        tv_student.setText("Welcome \n" + studentName + "\n" + student_id );
+        String Reg_no = intent.getStringExtra("U_ID");
+        student_id = intent.getIntExtra("S_ID",0);
+       // Toast.makeText(Student_dashboard.this,"Student id"+student_id,Toast.LENGTH_LONG).show();
+        tv_student.setText("Welcome \n" + studentName + "\n" + Reg_no );
         im1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i=new Intent(Student_dashboard.this, Student_Courses.class);
+                i.putExtra("S_ID",student_id);
                 startActivity(i);
 
             }

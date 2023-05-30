@@ -27,9 +27,14 @@ public class Teacher_dashboard extends AppCompatActivity {
         tvTeacherName = findViewById(R.id.tv_teacherName);
         Intent intent = getIntent();
         teacherName = intent.getStringExtra("TName");
+        String role=intent.getStringExtra("role");
+        int teacherid=intent.getIntExtra("tid",0);
         tvTeacherName.setText("Welcome: " + teacherName + "(Teacher)");
         im.setOnClickListener(view -> {
             Intent i = new Intent(Teacher_dashboard.this, CoursesActivity.class);
+            i.putExtra("tid",teacherid);
+            i.putExtra("role",role);
+            i.putExtra("tname",teacherName);
             startActivity(i);
         });
         im2.setOnClickListener(view -> {

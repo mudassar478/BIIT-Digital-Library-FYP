@@ -3,17 +3,17 @@ package com.example.biitdigitallibrarysystem.models;
 import com.google.gson.annotations.SerializedName;
 
 public class LoginModel {
-    @SerializedName("id")
+    @SerializedName("sid")
     private int sid ;
 
     @SerializedName("name")
     private String name ;
 
-    @SerializedName("userid")
+    @SerializedName("reg_no")
     private String reg_no ;
 
     @SerializedName("password")
-    private String pass;
+    private String password;
 
     @SerializedName("role")
     private String role;
@@ -56,11 +56,11 @@ public class LoginModel {
     }
 
     public String getPass() {
-        return pass;
+        return password;
     }
 
     public void setPass(String pass) {
-        this.pass = pass;
+        this.password = pass;
     }
 
     public String getRole() {

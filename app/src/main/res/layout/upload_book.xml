@@ -44,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="7dp"
-                    android:hint="title"
+
                     android:id="@+id/edtTitleUploadBook"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -70,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="7dp"
-                    android:hint="author name"
+
                     android:id="@+id/edtAuthorUploadBook"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -97,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="7dp"
-                    android:hint="publisher name"
+
                     android:id="@+id/edtPublisherUploadBook"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -123,7 +123,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="7dp"
-                    android:hint="isbn number"
+
                     android:id="@+id/edtISBNUploadBook"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -151,7 +151,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="118dp"
                     android:layout_marginLeft="7dp"
-                    android:hint="abstract  dajpdjaposaus as"
+
                     android:id="@+id/edtAbstractUploadBook"
                     android:textSize="16dp" />
 
@@ -175,7 +175,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:hint="file name "
+
                     android:id="@+id/text_view_fileName"
                     android:textSize="16dp" />
 
@@ -199,7 +199,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:hint="upload image of book "
+
                     android:id="@+id/text_view_imageName"
                     android:textSize="16dp" />
 
@@ -235,7 +235,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="7dp"
-                    android:hint="title"
+
                     android:id="@+id/edtPageTitleUploadBook"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -261,7 +261,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="7dp"
-                    android:hint=" pg no."
+
                     android:id="@+id/edtPageNoUploadBook"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -290,7 +290,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="118dp"
                     android:layout_marginLeft="7dp"
-                    android:hint="abstractqhsq"
+
                     android:id="@+id/edtKeyWordsUploadBook"
                     android:textSize="16dp" />
 
@@ -301,7 +301,10 @@
                 android:layout_height="wrap_content"
                 android:text="Add"
                 android:background="@color/primary"
-                android:id="@+id/btn_addTableOfContent"/>
+                android:id="@+id/btn_addTableOfContent"
+                android:layout_marginLeft="10dp"
+                android:foreground="?selectableItemBackground"
+                />
             <Button
                 android:id="@+id/btnUploadBookFinal"
                 android:layout_width="wrap_content"
@@ -315,4 +318,5 @@
         </LinearLayout>
 
     </LinearLayout>
+
 </ScrollView>

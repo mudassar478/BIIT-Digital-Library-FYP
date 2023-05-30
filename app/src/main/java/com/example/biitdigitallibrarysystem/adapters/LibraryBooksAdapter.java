@@ -77,8 +77,6 @@ public class LibraryBooksAdapter extends RecyclerView.Adapter<LibraryBooksAdapte
                 TableOFContent.bid=books.get(position).getBid();
                 Intent i = new Intent(context.getApplicationContext(), TableOFContent.class);
                 context.startActivity(i);
-
-
             }
         });
     }

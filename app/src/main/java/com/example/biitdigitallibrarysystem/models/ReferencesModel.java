@@ -5,27 +5,15 @@ public class ReferencesModel {
     String content,type,sourcename;
     int id,sourceid,lid;
 
-    public ReferencesModel(){
-
-    }
-
-    public ReferencesModel(String content, String type, String sourcename, int id, int sourceid, int lid){
-
-        this.content=content;
-        this.type=type;
-        this.sourcename=sourcename;
-        this.id=id;
-        this.sourceid=sourceid;
-        this.lid=lid;
-
-    }
-
     public String getContent() {
         return content;
     }
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public ReferencesModel() {
     }
 
     public String getType() {
@@ -68,4 +56,12 @@ public class ReferencesModel {
         this.lid = lid;
     }
 
+    public ReferencesModel(String content, String type, String sourcename, int sourceid, int lid) {
+        this.content = content;
+        this.type = type;
+        this.sourcename = sourcename;
+//        this.id = id;
+        this.sourceid = sourceid;
+        this.lid = lid;
+    }
 }
