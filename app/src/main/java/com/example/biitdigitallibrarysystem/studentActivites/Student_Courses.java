@@ -62,7 +62,7 @@ public class Student_Courses extends AppCompatActivity {
                 {
 
                     jsonArray = response.body();
-                    Toast.makeText(Student_Courses.this,"Response"+jsonArray,Toast.LENGTH_LONG).show();
+//                    Toast.makeText(Student_Courses.this,"Response"+jsonArray,Toast.LENGTH_LONG).show();
                     if (jsonArray != null && jsonArray.size() > 0)
                     {
                         //ArrayList<Std_CoursesModel> coursesList = new ArrayList<>();

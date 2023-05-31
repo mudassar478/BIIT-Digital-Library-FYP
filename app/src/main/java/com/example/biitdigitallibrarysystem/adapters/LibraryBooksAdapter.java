@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,8 @@ import java.util.ArrayList;
 
 public class LibraryBooksAdapter extends RecyclerView.Adapter<LibraryBooksAdapter.MyViewHolder>{
     Context context;
+    boolean isStarFilled = false;
+
     ArrayList<LibraryBook> books;
     String imagePath = APIClient.getImagePath();
     String filePath = APIClient.getFilePath();
@@ -38,7 +41,7 @@ public class LibraryBooksAdapter extends RecyclerView.Adapter<LibraryBooksAdapte
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView Books;
-        ImageView imageupload , btndownload , button3;
+        ImageView imageupload , btndownload , btnfav;
         Button btn_toc;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -46,7 +49,7 @@ public class LibraryBooksAdapter extends RecyclerView.Adapter<LibraryBooksAdapte
             imageupload=itemView.findViewById(R.id.img_bookupload);
             btn_toc = itemView.findViewById(R.id.btn_toc);
             btndownload = itemView.findViewById(R.id.btn_download);
-            button3=itemView.findViewById(R.id.btn_fav);
+            btnfav=itemView.findViewById(R.id.btn_fav);
         }
 
     }
@@ -77,6 +80,21 @@ public class LibraryBooksAdapter extends RecyclerView.Adapter<LibraryBooksAdapte
                 TableOFContent.bid=books.get(position).getBid();
                 Intent i = new Intent(context.getApplicationContext(), TableOFContent.class);
                 context.startActivity(i);
+            }
+        });
+        
+        
+        holder.btnfav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImageView btnfav = holder.btnfav;
+                if (isStarFilled) {
+                    btnfav.setImageResource(R.drawable.star);  // Change to empty star
+                    isStarFilled = false;
+                } else {
+                    btnfav.setImageResource(R.drawable.starfull);  // Change to dark star
+                    isStarFilled = true;
+                }
             }
         });
     }

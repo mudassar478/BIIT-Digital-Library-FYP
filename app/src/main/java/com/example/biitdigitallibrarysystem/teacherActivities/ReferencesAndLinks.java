@@ -138,7 +138,7 @@ public class ReferencesAndLinks extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 selectedItem = (String) spinner.getItemAtPosition(i);
-                Toast.makeText(ReferencesAndLinks.this, "" + selectedItem, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ReferencesAndLinks.this, "" + selectedItem, Toast.LENGTH_SHORT).show();
             }
 
             @Override

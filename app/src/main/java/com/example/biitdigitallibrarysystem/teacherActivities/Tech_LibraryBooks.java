@@ -6,9 +6,11 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.biitdigitallibrarysystem.R;
@@ -34,6 +36,7 @@ public class Tech_LibraryBooks extends AppCompatActivity {
     LibraryBooksAdapter booksAdapter;
     ArrayList<LibraryBook> list;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,7 +110,6 @@ public class Tech_LibraryBooks extends AppCompatActivity {
             }
         });
 
-
-
     }
+
 }
