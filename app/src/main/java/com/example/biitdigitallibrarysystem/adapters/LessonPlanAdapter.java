@@ -1,5 +1,6 @@
 package com.example.biitdigitallibrarysystem.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -51,9 +52,10 @@ public class LessonPlanAdapter extends RecyclerView.Adapter<LessonPlanAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LessonPlanAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull LessonPlanAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         LessonPlanModel object = lessonPlanModelList.get(position);
 //        holder.filename.setText(lessonPlanModel.getPath());
+
 
 
         holder.filename.setText(object.getTitle());
@@ -71,7 +73,7 @@ public class LessonPlanAdapter extends RecyclerView.Adapter<LessonPlanAdapter.Vi
             public void onClick(View view) {
                 lid = lessonPlanModelList.get(holder.getAdapterPosition()).getLid();
                 int tid= LessonPlanActivity.tid;
-                 lid=LessonPlanActivity.lid;
+//                 lid=LessonPlanActivity.lid;
                 String role= LessonPlanActivity.role;
                 Intent intent=new Intent(context,ReferencesAndLinks.class);
                 intent.putExtra("tid",tid);
@@ -85,11 +87,14 @@ public class LessonPlanAdapter extends RecyclerView.Adapter<LessonPlanAdapter.Vi
             public void onClick(View view) {
                 Retrofit retrofit= APIClient.getClient();
                 Endpoint endpoint= retrofit.create(Endpoint.class);
-                endpoint.TeacherDeleteLessonPlan(object.getLid()).enqueue(new Callback<ResponseBody>() {
+                lid = lessonPlanModelList.get(holder.getAdapterPosition()).getLid();
+                endpoint.TeacherDeleteLessonPlan(lid).enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful()){
-                            Toast.makeText(context.getApplicationContext(), response.message()+"LessonPlan Deleted Successfully",Toast.LENGTH_LONG).show();
+                            Toast.makeText(context.getApplicationContext(), "LessonPlan Deleted Successfully",Toast.LENGTH_LONG).show();
+                            notifyDataSetChanged();
+                            lessonPlanModelList.remove(position);
                         }
                         else {
                             Toast.makeText(context.getApplicationContext(), response.message()+"Failed to Delete",Toast.LENGTH_LONG).show();

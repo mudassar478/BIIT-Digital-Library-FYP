@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ import retrofit2.Retrofit;
 public class StudentLessonPlanAdapter extends RecyclerView.Adapter<StudentLessonPlanAdapter.ViewHolder> {
 
     Context context;
+    boolean isStarFilled = false;
     public static int lid;
 
     ArrayList<LessonPlanModel> lessonPlanModelList;
@@ -43,7 +45,7 @@ public class StudentLessonPlanAdapter extends RecyclerView.Adapter<StudentLesson
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.rv_lesson_plan, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.rvd_std_lessonplan, parent, false);
         return new ViewHolder(view);
 
     }
@@ -57,11 +59,18 @@ public class StudentLessonPlanAdapter extends RecyclerView.Adapter<StudentLesson
         holder.filename.setText(object.getTitle());
 //        holder.lid.setText(object.getLid());
 
-        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
+        holder.btnfav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(context, EditLessonPlan.class);
-                context.startActivity(intent);
+                ImageView btnfav = holder.btnfav;
+                if (isStarFilled) {
+                    btnfav.setImageResource(R.drawable.star);  // Change to empty star
+                    isStarFilled = false;
+                } else {
+                    btnfav.setImageResource(R.drawable.starfull);  // Change to dark star
+                    isStarFilled = true;
+                }
+
             }
         });
         holder.btnRefrenece.setOnClickListener(new View.OnClickListener() {
@@ -78,27 +87,12 @@ public class StudentLessonPlanAdapter extends RecyclerView.Adapter<StudentLesson
                 context.startActivity(intent);
             }
         });
-        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+        holder.btnDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Retrofit retrofit= APIClient.getClient();
-                Endpoint endpoint= retrofit.create(Endpoint.class);
-                endpoint.TeacherDeleteLessonPlan(object.getLid()).enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        if (response.isSuccessful()){
-                            Toast.makeText(context.getApplicationContext(), response.message()+"LessonPlan Deleted Successfully",Toast.LENGTH_LONG).show();
-                        }
-                        else {
-                            Toast.makeText(context.getApplicationContext(), response.message()+"Failed to Delete",Toast.LENGTH_LONG).show();
-                        }
-                    }
 
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
 
-                    }
-                });
+
             }
         });
     }
@@ -111,14 +105,14 @@ public class StudentLessonPlanAdapter extends RecyclerView.Adapter<StudentLesson
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView filename,lid;
-        ImageButton btnRefrenece,btnEdit,btnDelete;
+        ImageButton btnRefrenece,btnfav,btnDownload;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             filename= itemView.findViewById(R.id.filename_lessonplan);
             lid = itemView.findViewById(R.id.text_view_lid);
             btnRefrenece=itemView.findViewById(R.id.refrences_lessonplan);
-            btnEdit=itemView.findViewById(R.id.edit_lessonplan);
-            btnDelete=itemView.findViewById(R.id.delete_lessonplan);
+            btnfav=itemView.findViewById(R.id.fav_lessonplan);
+            btnDownload=itemView.findViewById(R.id.download_lessonplan);
 
         }
     }

@@ -31,7 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UploadBook extends AppCompatActivity {
-    UploadBookBinding binding;
+   UploadBookBinding binding;
     public ArrayList<MultipartBody.Part> imageList = new ArrayList<>();
     public ArrayList<MultipartBody.Part> fileList = new ArrayList<>();
     List<TableOfContent> list = new ArrayList<>();

@@ -2,11 +2,9 @@ package com.example.biitdigitallibrarysystem.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,11 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.biitdigitallibrarysystem.R;
 import com.example.biitdigitallibrarysystem.apiServices.APIClient;
 import com.example.biitdigitallibrarysystem.apiServices.Endpoint;
-import com.example.biitdigitallibrarysystem.models.LessonPlanModel;
 import com.example.biitdigitallibrarysystem.models.ReferencesModel;
-import com.example.biitdigitallibrarysystem.teacherActivities.EditLessonPlan;
-import com.example.biitdigitallibrarysystem.teacherActivities.LessonPlanActivity;
-import com.example.biitdigitallibrarysystem.teacherActivities.ReferencesAndLinks;
 
 import java.util.ArrayList;
 
@@ -31,16 +25,19 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class ReferanceAdapter extends RecyclerView.Adapter<ReferanceAdapter.ViewHolder> {
+public class Std_ReferanceAdapter extends RecyclerView.Adapter<Std_ReferanceAdapter.ViewHolder> {
 
     Context context;
     public static int lid, id;
 
+
+
     ArrayList<ReferencesModel> referencesModels;
 
-    public ReferanceAdapter(Context context, ArrayList<ReferencesModel> referencesModels) {
+    public Std_ReferanceAdapter(Context context, ArrayList<ReferencesModel> referencesModels) {
         this.context = context;
         this.referencesModels = referencesModels;
+
 
     }
 
@@ -53,7 +50,7 @@ public class ReferanceAdapter extends RecyclerView.Adapter<ReferanceAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ReferanceAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull Std_ReferanceAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         ReferencesModel object = referencesModels.get(position);
         id=object.getId();
         holder.txt_ReferenceAndLink.setText(object.getContent());
@@ -67,7 +64,7 @@ public class ReferanceAdapter extends RecyclerView.Adapter<ReferanceAdapter.View
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful()){
-                            Toast.makeText(context.getApplicationContext(), response.message()+"Refrence Deleted Successfully",Toast.LENGTH_LONG).show();
+                            Toast.makeText(context.getApplicationContext(), response.message()+"LessonPlan Deleted Successfully",Toast.LENGTH_LONG).show();
                             notifyDataSetChanged();
                             referencesModels.remove(position);
                         }

@@ -22,13 +22,24 @@
         android:text="Uplaod Book"
         android:id="@+id/btnUploadBook"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Books Upload by Teacher"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/primary"
+        android:textSize="18dp"
+        />
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
         android:id="@+id/rv_TeacherUploadbook"
-
+        android:background="@color/bg"
         />
 
 </LinearLayout>

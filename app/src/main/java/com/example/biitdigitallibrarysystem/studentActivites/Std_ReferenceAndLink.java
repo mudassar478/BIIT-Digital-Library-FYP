@@ -1,4 +1,4 @@
-package com.example.biitdigitallibrarysystem.teacherActivities;
+package com.example.biitdigitallibrarysystem.studentActivites;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,30 +13,27 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.biitdigitallibrarysystem.GlobalData;
 import com.example.biitdigitallibrarysystem.MainActivity;
 import com.example.biitdigitallibrarysystem.R;
 import com.example.biitdigitallibrarysystem.adapters.CourseTAdapter;
 import com.example.biitdigitallibrarysystem.adapters.LessonPlanAdapter;
 import com.example.biitdigitallibrarysystem.adapters.ReferanceAdapter;
+import com.example.biitdigitallibrarysystem.adapters.Std_ReferanceAdapter;
 import com.example.biitdigitallibrarysystem.adapters.Weeks1Adapter;
 import com.example.biitdigitallibrarysystem.apiServices.APIClient;
 import com.example.biitdigitallibrarysystem.apiServices.Endpoint;
-import com.example.biitdigitallibrarysystem.models.LoginModel;
 import com.example.biitdigitallibrarysystem.models.ReferencesModel;
 import com.example.biitdigitallibrarysystem.models.YourDataModel;
-import com.example.biitdigitallibrarysystem.studentActivites.Student_dashboard;
+import com.example.biitdigitallibrarysystem.teacherActivities.ReferencesAndLinks;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -44,12 +41,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class ReferencesAndLinks extends AppCompatActivity {
+public class Std_ReferenceAndLink extends AppCompatActivity {
     Context context;
     Spinner spinner;
     List<String> items;
     RecyclerView recyclerView;
-    ReferanceAdapter adapter;
+    Std_ReferanceAdapter adapter;
     public static int tid, lid;
     public static String role;
     TextView textView;
@@ -70,14 +67,17 @@ public class ReferencesAndLinks extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.references_and_links);
+        setContentView(R.layout.std_reference_and_link);
+
         recyclerView = findViewById(R.id.rv_referencesLinks);
         textView = findViewById(R.id.referensces_text);
+
 
         button = findViewById(R.id.btn_saveRefrences);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
 
                 text = textView.getText().toString();
@@ -86,6 +86,7 @@ public class ReferencesAndLinks extends AppCompatActivity {
                 int tid = MainActivity.tid;
                 int lid = LessonPlanAdapter.lid;
                 String Role = MainActivity.userName;
+
 
 
                 YourDataModel dataModel = new YourDataModel();
@@ -105,10 +106,10 @@ public class ReferencesAndLinks extends AppCompatActivity {
                         if (response.isSuccessful()) {
 
 
-                            Toast.makeText(ReferencesAndLinks.this, "inserted Successfully", Toast.LENGTH_SHORT).show();
-                            adapter.notifyDataSetChanged();
+                            Toast.makeText(getApplicationContext(), "inserted Successfully", Toast.LENGTH_SHORT).show();
+
                         } else {
-                            Toast.makeText(ReferencesAndLinks.this, "" + response.code(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "" + response.code(), Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -154,6 +155,8 @@ public class ReferencesAndLinks extends AppCompatActivity {
         int lid = LessonPlanAdapter.lid;
 
 
+
+
         jsonArray = new JsonArray();
         list = new ArrayList<>();
         Retrofit client = APIClient.getClient();
@@ -164,12 +167,12 @@ public class ReferencesAndLinks extends AppCompatActivity {
 
                 if (response.isSuccessful() && response.body() != null) {
                     list.addAll(response.body());
-                    adapter = new ReferanceAdapter(ReferencesAndLinks.this, list);
+                    adapter = new Std_ReferanceAdapter(getApplicationContext(), list);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     recyclerView.setAdapter(adapter);
 
                 } else {
-                    Toast.makeText(ReferencesAndLinks.this, "" + response.message(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "" + response.message(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -177,10 +180,10 @@ public class ReferencesAndLinks extends AppCompatActivity {
             public void onFailure(Call<ArrayList<ReferencesModel>> call, Throwable t) {
 
 
-                Toast.makeText(ReferencesAndLinks.this, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
 
     }
-}
+    }

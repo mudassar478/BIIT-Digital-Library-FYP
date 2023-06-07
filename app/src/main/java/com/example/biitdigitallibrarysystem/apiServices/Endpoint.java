@@ -31,6 +31,8 @@ import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface Endpoint {
+
+
     @GET("Login/UserLogin")
     Call<LoginModel> UserLogin(@Query("user") String user, @Query("password") String password);
 
@@ -54,14 +56,14 @@ public interface Endpoint {
     Call<JsonArray> FetchStudent(@Query("tid") int tid, @Query("section") String section);
 
 
-    @POST("TeacherCourse/TeacherUploadLessonPlan")
-    Call<ResponseBody> teacherUpload(@Query("tid") int tid, @Query("cid") int cid, @Query("title") String title, @Query("week") String week);
+//    @POST("TeacherCourse/TeacherUploadLessonPlan")
+//    Call<ResponseBody> teacherUpload(@Query("tid") int tid, @Query("cid") int cid, @Query("title") String title, @Query("week") String week);
 
     @GET("TeacherBook/TeacherFetchLibraryBook")
     Call<ArrayList<LibraryBook>> fetchLibraryBooks();
 
     @GET("TeacherBook/TeacherFetchOwnBooks")
-    Call<ArrayList<LibraryBook>> fetchOwnBooks();
+    Call<ArrayList<LibraryBook>> fetchOwnBooks(@Query("tid") int tid);
 
     @GET("TeacherBook/SearchLibarryBook")
     Call<ArrayList<LibraryBook>> SearchLibarryBook(@Query("libraryseach") String libraryseach);
@@ -83,15 +85,20 @@ public interface Endpoint {
     @GET("TeacherCourse/TeacherDeleteLessonPlan")
     Call<ResponseBody> TeacherDeleteLessonPlan(@Query("lid") int lid);
 
+    @GET("TeacherCourse/TeacherDeleteRefrences")
+    Call<ResponseBody> TeacherDeleteRefrences(@Query("id") int id);
 
     @POST("TeacherCourse/TeacherAddRefrences")
     Call<ResponseBody> teacheraddrefrences(@Body ReferencesModel r);
 
 
 
-
     @GET("TeacherCourse/TeacherFetchRefrences")
     Call<ArrayList<LessonPlanModel>> TeacherFetchRefrences(@Query("sourceid") int sourceid, @Query("lid") int lid, @Query("sourcename") String sourcename);
+
+
+    @GET("StudentCourse/Course")
+    Call<JsonArray> Course(@Query("sid") int sid);
 
 
     @Multipart
@@ -110,7 +117,6 @@ public interface Endpoint {
                     @Part("table_of_content") List<TableOfContent> list
             );
 
-
     @NonNull
     public default MultipartBody.Part prepareFilePart(String partName, Uri fileUri, Context context) throws IOException {
         File file = FileUtil.from(context, fileUri);
@@ -128,7 +134,18 @@ public interface Endpoint {
     }
 
 
-    @GET("StudentCourse/Course")
-    Call<JsonArray> Course(@Query("sid") int sid);
+    @Multipart
+    @POST("TeacherCourse/TeacherUploadLessonPlan")
+    public Call<String> teacherUploadLessonPlan
+            (
+
+                    @Part MultipartBody.Part file,
+                    @Part("tid") RequestBody tid,
+                    @Part("cid") RequestBody cid,
+                    @Part("title") RequestBody title,
+                    @Part("week") RequestBody week
+
+            );
+
 
 }

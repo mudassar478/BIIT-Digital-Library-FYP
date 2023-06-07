@@ -85,6 +85,8 @@ public class LessonPlanActivity extends AppCompatActivity {
                         path = jsonObject.get("path").getAsString();
                         //Toast.makeText(LessonPlanActivity.this,"title"+title,Toast.LENGTH_LONG).show();
                         lessonPlanModel.setTitle(title);
+                        lessonPlanModel.setLid(lid);
+                        lessonPlanModel.setPath(path);
                         //lessonPlanModel.setTitle(path);
                         list.add(lessonPlanModel);
                     }

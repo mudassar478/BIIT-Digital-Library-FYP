@@ -116,7 +116,7 @@ public class LibraryBook {
     private String abstractBook;
 
     @SerializedName("path")
-    private String pdf_path;
+    public String pdf_path;
 
     @SerializedName("image_path")
     private String image_path;

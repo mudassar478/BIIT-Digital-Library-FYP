@@ -110,7 +110,7 @@ public class WeeksActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(WeeksActivity.this, UploadLessonPlanActivity.class);
-
+                i.putExtra("cid", cid);
                 startActivity(i);
 
             }

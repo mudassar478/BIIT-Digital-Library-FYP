@@ -41,7 +41,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="7dp"
 
@@ -67,7 +67,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="7dp"
 
@@ -94,7 +94,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="7dp"
 
@@ -120,7 +120,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="7dp"
 
@@ -148,7 +148,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="280dp"
                     android:layout_height="118dp"
                     android:layout_marginLeft="7dp"
 
@@ -172,7 +172,7 @@
                     android:text="Choose File:" />
 
                 <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
 
@@ -196,11 +196,11 @@
                     android:text="Choose Image:" />
 
                 <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-
                     android:id="@+id/text_view_imageName"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginLeft="5dp"
                     android:textSize="16dp" />
 
             </LinearLayout>
@@ -232,7 +232,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="7dp"
 
@@ -258,7 +258,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="7dp"
 
@@ -287,7 +287,7 @@
                     />
 
                 <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="280dp"
                     android:layout_height="118dp"
                     android:layout_marginLeft="7dp"
 

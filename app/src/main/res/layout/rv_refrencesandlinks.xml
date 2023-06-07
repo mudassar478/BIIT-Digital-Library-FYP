@@ -15,8 +15,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="4"
+        android:orientation="horizontal"
 
         >
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:hint="state"
+            android:layout_marginTop="22dp"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/ref_state"/>
+
         <TextView
 
             android:id="@+id/txt_ReferenceAndLink"
@@ -37,12 +47,13 @@
         >
 
         <ImageView
+            android:id="@+id/img_deleteReference"
             android:layout_width="51dp"
             android:layout_height="22dp"
             android:layout_gravity="center"
             android:layout_marginVertical="5dp"
             android:layout_weight="1"
-            android:src="@drawable/three_dots" />
+            android:src="@drawable/ic_baseline_delete_24" />
 
     </LinearLayout>
     </LinearLayout>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import java.util.List;
 public class TableOfContentAdapter extends RecyclerView.Adapter<TableOfContentAdapter.TableOfContentViewHolder> {
 
     Context mContext;
+    boolean isStarFilled = false;
     List<TableOfContentModel> tableOFContentList;
 
 
@@ -41,7 +43,21 @@ public class TableOfContentAdapter extends RecyclerView.Adapter<TableOfContentAd
         holder.txtViewTOC.setText(""+tableOFContent.getKeywords());
 
 
+        holder.imgViewStar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImageView btnfav = holder.imgViewStar;
+                if (isStarFilled) {
+                    btnfav.setImageResource(R.drawable.star);  // Change to empty star
+                    isStarFilled = false;
+                } else {
+                    btnfav.setImageResource(R.drawable.starfull);  // Change to dark star
+                    isStarFilled = true;
+                }
+            }
+        });
     }
+
 
 
     @Override
@@ -54,12 +70,14 @@ public class TableOfContentAdapter extends RecyclerView.Adapter<TableOfContentAd
     public class TableOfContentViewHolder extends RecyclerView.ViewHolder{
 
         TextView txtViewPageno,txtViewTOC;
+        ImageView imgViewStar;
 
         public TableOfContentViewHolder(@NonNull View itemView) {
             super(itemView);
 
             txtViewPageno = itemView.findViewById(R.id.txtViewPageno);
             txtViewTOC = itemView.findViewById(R.id.txtViewTOC);
+            imgViewStar= itemView.findViewById(R.id.imgViewStarTOC);
         }
     }
 }

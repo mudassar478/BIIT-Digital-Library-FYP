@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".teacherActivities.UploadLessonPlanActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -35,6 +36,7 @@
             android:layout_height="wrap_content"
             android:hint="Lesson Plan 3"
             android:textSize="16dp"
+            android:textColor="@color/black"
             />
 
     </LinearLayout>
@@ -55,11 +57,13 @@
             android:layout_marginLeft="10dp"
             />
         <TextView
+            android:id="@+id/lessonplannamelabel"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Basics of DLD.doc"
+            android:hint="File name"
             android:textSize="15dp"
+            android:textColor="@color/black"
             />
 
     </LinearLayout>
@@ -75,7 +79,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_margin="10dp">
+            android:layout_margin="10dp"
+           >
 
         </Spinner>
 
@@ -89,7 +94,8 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/primary"
-        android:text="Upload" />
+        android:text="Upload"
+        android:textColor="@color/white"/>
 
 
 
