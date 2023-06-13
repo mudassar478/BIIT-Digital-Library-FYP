@@ -73,7 +73,8 @@ public class MyBookTeacher extends AppCompatActivity {
               }
                 else
               {
-                  Toast.makeText(MyBookTeacher.this, ""+response.message(), Toast.LENGTH_SHORT).show();
+                  Toast.makeText(MyBookTeacher.this, "Upload Book First", Toast.LENGTH_SHORT).show();
+//                  Toast.makeText(MyBookTeacher.this, "Upload Book First"+response.message(), Toast.LENGTH_SHORT).show();
               }
             }
 

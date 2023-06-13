@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.biitdigitallibrarysystem.MainActivity;
 import com.example.biitdigitallibrarysystem.R;
 import com.example.biitdigitallibrarysystem.apiServices.APIClient;
 import com.example.biitdigitallibrarysystem.apiServices.Endpoint;
@@ -28,9 +29,9 @@ import retrofit2.Retrofit;
 public class Std_ReferanceAdapter extends RecyclerView.Adapter<Std_ReferanceAdapter.ViewHolder> {
 
     Context context;
-    public static int lid, id;
+    public static int lid;
 
-
+    public static int id;
 
     ArrayList<ReferencesModel> referencesModels;
 
@@ -38,13 +39,12 @@ public class Std_ReferanceAdapter extends RecyclerView.Adapter<Std_ReferanceAdap
         this.context = context;
         this.referencesModels = referencesModels;
 
-
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.rv_refrencesandlinks, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.rv_std_referenceandlinks, parent, false);
         return new ViewHolder(view);
 
     }
@@ -52,9 +52,13 @@ public class Std_ReferanceAdapter extends RecyclerView.Adapter<Std_ReferanceAdap
     @Override
     public void onBindViewHolder(@NonNull Std_ReferanceAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         ReferencesModel object = referencesModels.get(position);
-        id=object.getId();
+         id=object.getId();
         holder.txt_ReferenceAndLink.setText(object.getContent());
-        holder.state.setText(object.getType());
+//        holder.state.setText(object.getType());
+
+        if(object.getSourcename().contains("teacher")){
+            holder.img_delete.setVisibility(View.GONE);
+        }
         holder.img_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,9 +68,9 @@ public class Std_ReferanceAdapter extends RecyclerView.Adapter<Std_ReferanceAdap
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful()){
-                            Toast.makeText(context.getApplicationContext(), response.message()+"LessonPlan Deleted Successfully",Toast.LENGTH_LONG).show();
-                            notifyDataSetChanged();
+                            Toast.makeText(context.getApplicationContext(), "Reference Deleted Successfully",Toast.LENGTH_LONG).show();
                             referencesModels.remove(position);
+                            notifyDataSetChanged();
                         }
                         else {
                             Toast.makeText(context.getApplicationContext(), response.message()+"Failed to Delete",Toast.LENGTH_LONG).show();
@@ -80,8 +84,6 @@ public class Std_ReferanceAdapter extends RecyclerView.Adapter<Std_ReferanceAdap
                 });
             }
         });
-
-
     }
 
     @Override

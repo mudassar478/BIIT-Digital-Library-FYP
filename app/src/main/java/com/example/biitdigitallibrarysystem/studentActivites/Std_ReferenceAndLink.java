@@ -9,6 +9,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -42,27 +44,24 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class Std_ReferenceAndLink extends AppCompatActivity {
-    Context context;
-    Spinner spinner;
-    List<String> items;
+//    Context context;
+
     RecyclerView recyclerView;
     Std_ReferanceAdapter adapter;
-    public static int tid, lid;
+    public static int tid, lid,sid;
     public static String role;
     TextView textView;
     Button button;
-    String selectedItem;
     String text;
 
-    public static int id;
+//    public static int id;
 
     ArrayList<ReferencesModel> list;
     ReferencesModel referencesModel;
     JsonObject jsonObject = null;
     JsonArray jsonArray;
 
-    //    ReferencesModel referencesModel;
-//    ArrayList<ReferencesModel> list = new ArrayList<>();
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,27 +77,24 @@ public class Std_ReferenceAndLink extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-
                 text = textView.getText().toString();
 
-
-                int tid = MainActivity.tid;
-                int lid = LessonPlanAdapter.lid;
-                String Role = MainActivity.userName;
-
-
+                int sid = MainActivity.sid;
+//                int lid = LessonPlanAdapter.lid;
+                String role = MainActivity.userName;
+                int lid = Student_lessonPlan.lid;
 
                 YourDataModel dataModel = new YourDataModel();
-                dataModel.setSourceId(tid);
+                dataModel.setSourceId(sid);
                 dataModel.setLid(lid);
                 dataModel.setContent(text);
-                dataModel.setType(selectedItem);
-                dataModel.setSourceName(role);
+//                dataModel.setType(selectedItem);
+                dataModel.setSourceName("student");
+                dataModel.setType("private");
 
                 Retrofit retrofit = APIClient.getClient();
                 Endpoint endpoint = retrofit.create(Endpoint.class);
-                ReferencesModel model=new ReferencesModel(text,selectedItem,role,tid,lid);
+                ReferencesModel model=new ReferencesModel(text,"private","student",sid,lid);
 
                 endpoint.teacheraddrefrences(model).enqueue(new Callback<ResponseBody>() {
                     @Override
@@ -124,44 +120,25 @@ public class Std_ReferenceAndLink extends AppCompatActivity {
         });
 
         Intent i = getIntent();
-        tid = i.getIntExtra("tid", 0);
+        sid = i.getIntExtra("sid", 0);
         lid = i.getIntExtra("lid", 0);
         role = i.getStringExtra("role");
 
-        //spinner code
-        spinner = findViewById(R.id.spinnerReferencesLinks);
-        items = new ArrayList<>();
-        items.add("Public");
-        items.add("Private");
 
-        spinner.setAdapter(new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, items));
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                selectedItem = (String) spinner.getItemAtPosition(i);
-//                Toast.makeText(ReferencesAndLinks.this, "" + selectedItem, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
         int courseId = CourseTAdapter.idc;
         int teacherid = MainActivity.tid;
         String role = MainActivity.loginRole;
         String weekid = Weeks1Adapter.weekid;
-        int lid = LessonPlanAdapter.lid;
-
-
+        int lid = Student_lessonPlan.lid;
+        int sid= MainActivity.sid;
 
 
         jsonArray = new JsonArray();
         list = new ArrayList<>();
         Retrofit client = APIClient.getClient();
         Endpoint endpoint = client.create(Endpoint.class);
-        endpoint.teacherfetchrefrences(tid, lid, role).enqueue(new Callback<ArrayList<ReferencesModel>>() {
+        endpoint.teacherfetchrefrences(sid, lid, role).enqueue(new Callback<ArrayList<ReferencesModel>>() {
             @Override
             public void onResponse(@NonNull Call<ArrayList<ReferencesModel>> call, @NonNull Response<ArrayList<ReferencesModel>> response) {
 
@@ -170,6 +147,18 @@ public class Std_ReferenceAndLink extends AppCompatActivity {
                     adapter = new Std_ReferanceAdapter(getApplicationContext(), list);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     recyclerView.setAdapter(adapter);
+
+//////////////                   Check hyperlink /////////////
+                    String text = textView.getText().toString();
+
+                    // Check if the text contains a link
+                    if (Linkify.addLinks(textView, Linkify.WEB_URLS)) {
+                        // Make the link clickable
+                        textView.setMovementMethod(LinkMovementMethod.getInstance());
+                    }
+////////////                     end check hyperlink /////////
+
+
 
                 } else {
                     Toast.makeText(getApplicationContext(), "" + response.message(), Toast.LENGTH_SHORT).show();

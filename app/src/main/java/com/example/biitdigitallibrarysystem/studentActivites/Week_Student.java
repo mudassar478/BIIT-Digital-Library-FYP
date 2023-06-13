@@ -73,7 +73,7 @@ public class Week_Student extends AppCompatActivity {
                     rv_weeks.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     rv_weeks.setAdapter(adapter);
                 } else {
-                    Toast.makeText(Week_Student.this, "Error: " + response.message(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Week_Student.this, "Not Uploaded by Teacher" , Toast.LENGTH_SHORT).show();
                 }
             }
 

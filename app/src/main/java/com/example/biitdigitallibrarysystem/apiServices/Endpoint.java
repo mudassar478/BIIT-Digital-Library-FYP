@@ -105,16 +105,16 @@ public interface Endpoint {
     @POST("TeacherBook/TeacherUploadBook")
     public Call<String> TeacherUploadBook
             (
-                    @Part ArrayList<MultipartBody.Part> imagefile,
-                    @Part ArrayList<MultipartBody.Part> bookfile,
+                    @Part MultipartBody.Part image,
+                    @Part MultipartBody.Part book,
                     @Part("tid") RequestBody tid,
                     @Part("sourcerole") RequestBody sourcerole,
-                    @Part("title") RequestBody title,
-                    @Part("author") RequestBody author,
-                    @Part("publisher") RequestBody publisher,
-                    @Part("isbn") RequestBody isbn,
-                    @Part("abstractt") RequestBody abstractt,
-                    @Part("table_of_content") List<TableOfContent> list
+                    @Part("Title") RequestBody title,
+                    @Part("Author") RequestBody author,
+                    @Part("Publisher") RequestBody publisher,
+                    @Part("ISBN") RequestBody isbn,
+                    @Part("abstractt") RequestBody abstractt
+
             );
 
     @NonNull
@@ -146,6 +146,9 @@ public interface Endpoint {
                     @Part("week") RequestBody week
 
             );
+
+    @POST("TeacherBook/TeacherUploadTableofContent")
+    Call<String> TeacherUploadTableofContent(@Query("bid") int bid, @Query("title") String title, @Query("pageno") String pageno, @Query("keywords")String keywords);
 
 
 }

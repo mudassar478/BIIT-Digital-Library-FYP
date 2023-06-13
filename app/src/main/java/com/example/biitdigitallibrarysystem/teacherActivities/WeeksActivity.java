@@ -86,7 +86,7 @@ public class WeeksActivity extends AppCompatActivity {
                     rv_weeks.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     rv_weeks.setAdapter(adapter);
                 } else {
-                    Toast.makeText(WeeksActivity.this, "Error: " + response.message(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(WeeksActivity.this, "Upload LessonPlan First" , Toast.LENGTH_LONG).show();
                 }
             }
 

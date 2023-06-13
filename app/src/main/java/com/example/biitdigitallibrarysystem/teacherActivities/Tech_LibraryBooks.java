@@ -67,15 +67,19 @@ public class Tech_LibraryBooks extends AppCompatActivity {
                     list = new ArrayList<>();
                     list.clear();
                     list = response.body();
-                    librarybooks.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    booksAdapter = new LibraryBooksAdapter(Tech_LibraryBooks.this, list);
-                    librarybooks.setAdapter(booksAdapter);
-                    librarybooks.setHasFixedSize(true);
+//                    librarybooks.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+//                    booksAdapter = new LibraryBooksAdapter(Tech_LibraryBooks.this, list);
+//                    librarybooks.setAdapter(booksAdapter);
+//                    librarybooks.setHasFixedSize(true);
 
 
                 } else {
                     Toast.makeText(Tech_LibraryBooks.this, "" + response.message(), Toast.LENGTH_SHORT).show();
                 }
+                librarybooks.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                booksAdapter = new LibraryBooksAdapter(Tech_LibraryBooks.this, list);
+                librarybooks.setAdapter(booksAdapter);
+                librarybooks.setHasFixedSize(true);
             }
 
             @Override
@@ -83,7 +87,6 @@ public class Tech_LibraryBooks extends AppCompatActivity {
                 Toast.makeText(Tech_LibraryBooks.this, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
 
         btnMyBook = findViewById(R.id.btn_mybooks);
         btnMyBook.setOnClickListener(new View.OnClickListener() {

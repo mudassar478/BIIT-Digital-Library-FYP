@@ -171,11 +171,10 @@
                     android:id="@+id/btn_uploadFile"
                     android:text="Choose File:" />
 
-                <EditText
+                <TextView
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-
                     android:id="@+id/text_view_fileName"
                     android:textSize="16dp" />
 
@@ -195,7 +194,7 @@
                     android:id="@+id/btn_uploadImage"
                     android:text="Choose Image:" />
 
-                <EditText
+                <TextView
                     android:id="@+id/text_view_imageName"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"

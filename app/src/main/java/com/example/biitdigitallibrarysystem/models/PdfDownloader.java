@@ -37,5 +37,4 @@ public class PdfDownloader {
             Toast.makeText(context, "Download Manager not available", Toast.LENGTH_SHORT).show();
         }
     }
-
 }

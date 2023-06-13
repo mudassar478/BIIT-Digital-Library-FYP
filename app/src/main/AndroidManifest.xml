@@ -20,7 +20,28 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Std_ReferenceAndLink"
+            android:name=".teacherActivities.AddTOC_book"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".teacherActivities.VideoPlay"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".studentActivites.StarLessonPlans"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".studentActivites.Std_ReferenceAndLink"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

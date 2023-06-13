@@ -34,8 +34,8 @@ import retrofit2.Retrofit;
 public class ReferanceAdapter extends RecyclerView.Adapter<ReferanceAdapter.ViewHolder> {
 
     Context context;
-    public static int lid, id;
-
+    public static int lid;
+    public static int id;
     ArrayList<ReferencesModel> referencesModels;
 
     public ReferanceAdapter(Context context, ArrayList<ReferencesModel> referencesModels) {
@@ -55,34 +55,64 @@ public class ReferanceAdapter extends RecyclerView.Adapter<ReferanceAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ReferanceAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         ReferencesModel object = referencesModels.get(position);
-        id=object.getId();
+        int id=object.getId();
         holder.txt_ReferenceAndLink.setText(object.getContent());
         holder.state.setText(object.getType());
+//        holder.img_delete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Retrofit retrofit= APIClient.getClient();
+//                Endpoint endpoint= retrofit.create(Endpoint.class);
+//                endpoint.TeacherDeleteRefrences(id).enqueue(new Callback<ResponseBody>() {
+//                    @Override
+//                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                        if (response.isSuccessful()){
+//                            Toast.makeText(context.getApplicationContext(), response.message()+"Refrence Deleted Successfully",Toast.LENGTH_LONG).show();
+//                            referencesModels.remove(position);
+//                            notifyDataSetChanged();
+//
+//                        }
+//                        else {
+//                            Toast.makeText(context.getApplicationContext(), response.message()+"Failed to Delete",Toast.LENGTH_LONG).show();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+//
+//                    }
+//                });
+//            }
+//        });
         holder.img_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Retrofit retrofit= APIClient.getClient();
-                Endpoint endpoint= retrofit.create(Endpoint.class);
-                endpoint.TeacherDeleteRefrences(id).enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        if (response.isSuccessful()){
-                            Toast.makeText(context.getApplicationContext(), response.message()+"Refrence Deleted Successfully",Toast.LENGTH_LONG).show();
-                            notifyDataSetChanged();
-                            referencesModels.remove(position);
+                final int clickedPosition = holder.getAdapterPosition();
+                if (clickedPosition != RecyclerView.NO_POSITION) {
+                    Retrofit retrofit = APIClient.getClient();
+                    Endpoint endpoint = retrofit.create(Endpoint.class);
+                    endpoint.TeacherDeleteRefrences(id).enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if (response.isSuccessful()) {
+                                Toast.makeText(context.getApplicationContext(), response.message() + " LessonPlan Deleted Successfully", Toast.LENGTH_LONG).show();
+                                referencesModels.remove(clickedPosition); // Remove the item from the list using the final copy of position
+                                notifyItemRemoved(clickedPosition); // Notify the adapter of the item removal
+                                notifyItemRangeChanged(clickedPosition, referencesModels.size()); // Update remaining items
+                            } else {
+                                Toast.makeText(context.getApplicationContext(), response.message() + " Failed to Delete", Toast.LENGTH_LONG).show();
+                            }
                         }
-                        else {
-                            Toast.makeText(context.getApplicationContext(), response.message()+"Failed to Delete",Toast.LENGTH_LONG).show();
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            // Handle failure
                         }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                    }
-                });
+                    });
+                }
             }
         });
+
 
 
     }

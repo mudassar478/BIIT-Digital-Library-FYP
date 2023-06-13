@@ -26,7 +26,7 @@ public class St_SaveItems extends AppCompatActivity {
         im1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(St_SaveItems.this,CoursesActivity.class);
+                Intent i=new Intent(St_SaveItems.this,StarLessonPlans.class);
                 startActivity(i);
 
             }

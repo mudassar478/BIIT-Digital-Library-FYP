@@ -9,6 +9,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -57,7 +59,7 @@ public class ReferencesAndLinks extends AppCompatActivity {
     String selectedItem;
     String text;
 
-    public static int id;
+//    public static int id;
 
     ArrayList<ReferencesModel> list;
     ReferencesModel referencesModel;
@@ -95,9 +97,10 @@ public class ReferencesAndLinks extends AppCompatActivity {
                 dataModel.setType(selectedItem);
                 dataModel.setSourceName(role);
 
+
                 Retrofit retrofit = APIClient.getClient();
                 Endpoint endpoint = retrofit.create(Endpoint.class);
-                ReferencesModel model=new ReferencesModel(text,selectedItem,role,tid,lid);
+                ReferencesModel model=new ReferencesModel(text,selectedItem,"teacher",tid,lid);
 
                 endpoint.teacheraddrefrences(model).enqueue(new Callback<ResponseBody>() {
                     @Override
@@ -106,7 +109,7 @@ public class ReferencesAndLinks extends AppCompatActivity {
 
 
                             Toast.makeText(ReferencesAndLinks.this, "inserted Successfully", Toast.LENGTH_SHORT).show();
-                            adapter.notifyDataSetChanged();
+
                         } else {
                             Toast.makeText(ReferencesAndLinks.this, "" + response.code(), Toast.LENGTH_SHORT).show();
                         }
@@ -167,6 +170,17 @@ public class ReferencesAndLinks extends AppCompatActivity {
                     adapter = new ReferanceAdapter(ReferencesAndLinks.this, list);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     recyclerView.setAdapter(adapter);
+
+//////////////                   Check hyperlink /////////////
+                    String text = textView.getText().toString();
+
+                    // Check if the text contains a link
+                    if (Linkify.addLinks(textView, Linkify.WEB_URLS)) {
+                        // Make the link clickable
+                        textView.setMovementMethod(LinkMovementMethod.getInstance());
+                    }
+////////////                     end check hyperlink /////////
+
 
                 } else {
                     Toast.makeText(ReferencesAndLinks.this, "" + response.message(), Toast.LENGTH_SHORT).show();

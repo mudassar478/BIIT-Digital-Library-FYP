@@ -12,7 +12,7 @@ public class APIClient {
     private Endpoint myApi;
 
     private static Retrofit retrofit = null;
-    public static String ip = "192.168.0.105";
+    public static String ip = "192.168.187.147";
 
     public static Retrofit getClient() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();

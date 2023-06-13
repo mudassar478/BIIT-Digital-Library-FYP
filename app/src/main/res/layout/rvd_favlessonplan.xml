@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginTop="5dp">
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +20,7 @@
             >
             <TextView
                 android:id="@+id/filename_lessonplan"
-                android:layout_width="220dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="file.doc"
                 android:textColor="@color/black"
@@ -34,31 +33,19 @@
                 android:layout_height="0dp"
                 android:id="@+id/text_view_lid"
                 android:visibility="invisible"/>
-            <ImageButton
-                android:id="@+id/refrences_lessonplan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:src="@drawable/link"
-                />
+
             <ImageButton
                 android:id="@+id/fav_lessonplan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:src="@drawable/star"
-                />
-            <ImageButton
-                android:id="@+id/download_lessonplan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:src="@drawable/download"
-                />
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/star" />
 
 
         </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

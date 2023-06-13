@@ -4,7 +4,7 @@ import java.util.List;
 
 public class TableOfContent {
     private String title;
-    private int pageNumber;
+    private int pageno;
     private String keywords;
 
 
@@ -17,12 +17,12 @@ public class TableOfContent {
         this.title = title;
     }
 
-    public int getPageNumber() {
-        return pageNumber;
+    public int getPageno() {
+        return pageno;
     }
 
-    public void setPageNumber(int pageNumber) {
-        this.pageNumber = pageNumber;
+    public void setPageno(int pageNumber) {
+        this.pageno = pageNumber;
     }
 
     public String getKeywords() {

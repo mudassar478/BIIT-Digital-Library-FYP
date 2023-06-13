@@ -4,19 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.biitdigitallibrarysystem.MainActivity;
 import com.example.biitdigitallibrarysystem.R;
-import com.example.biitdigitallibrarysystem.adapters.LibraryBooksAdapter;
+import com.example.biitdigitallibrarysystem.adapters.MyBookTeacherAdapter;
 import com.example.biitdigitallibrarysystem.adapters.TableOfContentAdapter;
 import com.example.biitdigitallibrarysystem.apiServices.APIClient;
 import com.example.biitdigitallibrarysystem.apiServices.Endpoint;
@@ -26,7 +22,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -34,24 +29,53 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class TableOFContent<TableOFContent> extends AppCompatActivity {
+public class AddTOC_book extends AppCompatActivity {
 
-    RecyclerView table_of_content;
+    EditText edt_AddTOCbook, edt_TOCPage;
+    Button btn_addToc;
+    RecyclerView rv_TOCbook;
     ArrayList<TableOfContentModel> list = new ArrayList<>();
     TableOfContentModel tableOFContent;
     JsonObject jsonObject=null;
     JsonArray jsonArray;
     public static int bid;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.table_ofcontent);
-
-        jsonArray = new JsonArray();
+        setContentView(R.layout.activity_add_toc_book);
         Retrofit retrofit = APIClient.getClient();
-        table_of_content = findViewById(R.id.rv_toc);
         Endpoint endpoint = retrofit.create(Endpoint.class);
+        edt_AddTOCbook=findViewById(R.id.edt_AddTOCbook);
+       edt_TOCPage= findViewById(R.id.edt_TOCPage);
+        btn_addToc= findViewById(R.id.btn_addToc);
+        rv_TOCbook=  findViewById(R.id.rv_TOCbook);
+
+        btn_addToc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+               // TableOFContent.bid=books.get(position).getBid();
+
+                bid = TableOFContent.bid;
+
+                endpoint.TeacherUploadTableofContent(bid,"Select query","20","select,select data from database" ).enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        Toast.makeText(AddTOC_book.this, ""+response.code(), Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
+
+
+            }
+        });
+
         endpoint.TeacherFetchTableofContent(com.example.biitdigitallibrarysystem.teacherActivities.TableOFContent.bid).enqueue(new Callback<JsonArray>() {
             @Override
             public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
@@ -78,27 +102,24 @@ public class TableOFContent<TableOFContent> extends AppCompatActivity {
                         list.add(tableOFContent);
 
                     }
-                    TableOfContentAdapter tableOfContentAdapter=new TableOfContentAdapter(com.example.biitdigitallibrarysystem.teacherActivities.TableOFContent.this,list);
-                    table_of_content.setAdapter(tableOfContentAdapter);
-                    table_of_content.setLayoutManager(new LinearLayoutManager(com.example.biitdigitallibrarysystem.teacherActivities.TableOFContent.this));
+                    TableOfContentAdapter tableOfContentAdapter=new TableOfContentAdapter(getApplicationContext(),list);
+                    rv_TOCbook.setAdapter(tableOfContentAdapter);
+                    rv_TOCbook.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 }
 
                 else
                 {
-                    Toast.makeText(com.example.biitdigitallibrarysystem.teacherActivities.TableOFContent.this, ""+response.message(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), ""+response.message(), Toast.LENGTH_SHORT).show();
                 }
 
             }
 
             @Override
             public void onFailure(Call<JsonArray> call, Throwable t) {
-                Toast.makeText(com.example.biitdigitallibrarysystem.teacherActivities.TableOFContent.this, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), ""+t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
 
-
     }
-
-
 }

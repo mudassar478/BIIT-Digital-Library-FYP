@@ -22,20 +22,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.biitdigitallibrarysystem.R;
 import com.example.biitdigitallibrarysystem.apiServices.APIClient;
 import com.example.biitdigitallibrarysystem.apiServices.Endpoint;
+import com.example.biitdigitallibrarysystem.models.AppDatabase;
 import com.example.biitdigitallibrarysystem.models.DownloadImageTask;
 import com.example.biitdigitallibrarysystem.models.LibraryBook;
 import com.example.biitdigitallibrarysystem.models.PdfDownloader;
+import com.example.biitdigitallibrarysystem.models.User;
+import com.example.biitdigitallibrarysystem.models.UserDao;
 import com.example.biitdigitallibrarysystem.teacherActivities.TableOFContent;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class Blval {
     public boolean bolcheck;
-
     public Blval() {
         bolcheck = false;
     }
-
 }
 
 public class LibraryBooksAdapter extends RecyclerView.Adapter<LibraryBooksAdapter.MyViewHolder> {
@@ -93,6 +95,16 @@ public class LibraryBooksAdapter extends RecyclerView.Adapter<LibraryBooksAdapte
     @Override
     public void onBindViewHolder(@NonNull LibraryBooksAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.Books.setText(books.get(position).getTitle());
+        ///////fav start
+        UserDao userDao= AppDatabase.getAppDatabase(context).getUserDao();
+        List<User>booknameslist=userDao.getFvtFilePath(books.get(position).getTitle());
+        if (!(booknameslist.isEmpty())){
+            holder.btnfav.setImageResource(R.drawable.starfull);
+        }else {
+            holder.btnfav.setImageResource(R.drawable.star);
+        }
+        ///////////fav end
+
         new DownloadImageTask(holder.imageupload).execute(imagePath + books.get(position).getImage_path());
 
         LibraryBook obj= books.get(position);
@@ -126,25 +138,17 @@ public class LibraryBooksAdapter extends RecyclerView.Adapter<LibraryBooksAdapte
         holder.btnfav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.btnfav.setSelected(val.bolcheck);
-
-                ImageView btnfav = holder.btnfav;
-
-//                if (isStarFilled) {
-//                    btnfav.setImageResource(R.drawable.star);  // Change to empty star
-//                    isStarFilled = false;
-//                } else {
-//                    btnfav.setImageResource(R.drawable.starfull);  // Change to dark star
-//                    isStarFilled = true;
-//                }
-//                btnfav.setImageResource(R.drawable.star);
-
-                        if(blvals.get(position).bolcheck){
-            btnfav.setImageResource(R.drawable.star);
-        }
-        else{
-            btnfav.setImageResource(R.drawable.starfull);
-        }
+                ////////fav start
+                List<User> booknames=userDao.getFvtFilePath(books.get(position).getTitle());
+                if (booknames.isEmpty()){
+                    userDao.insertAll(new User(0,books.get(position).getTitle()));
+                    holder.btnfav.setImageResource(R.drawable.starfull);
+                    Toast.makeText(context, "Added to Bookmarks", Toast.LENGTH_SHORT).show();
+                }else {
+                    userDao.deleteFavourites(books.get(position).getTitle());
+                    holder.btnfav.setImageResource(R.drawable.star);
+                }
+                /////fav end
             }
 
         });

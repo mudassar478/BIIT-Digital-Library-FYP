@@ -67,6 +67,8 @@ public class UploadLessonPlanActivity extends AppCompatActivity {
     EditText lptittle;
     Spinner spinner;
     TextView textView;
+
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

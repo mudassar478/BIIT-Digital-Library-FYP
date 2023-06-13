@@ -2,6 +2,7 @@ package com.example.biitdigitallibrarysystem.adapters;
 
 
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -18,10 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.biitdigitallibrarysystem.R;
 import com.example.biitdigitallibrarysystem.apiServices.APIClient;
+import com.example.biitdigitallibrarysystem.models.AppDatabase;
 import com.example.biitdigitallibrarysystem.models.DownloadImageTask;
 import com.example.biitdigitallibrarysystem.models.LibraryBook;
 import com.example.biitdigitallibrarysystem.models.MyBookTeacherModel;
 import com.example.biitdigitallibrarysystem.models.PdfDownloader;
+import com.example.biitdigitallibrarysystem.models.User;
+import com.example.biitdigitallibrarysystem.models.UserDao;
+import com.example.biitdigitallibrarysystem.teacherActivities.AddTOC_book;
 import com.example.biitdigitallibrarysystem.teacherActivities.MyBookTeacher;
 import com.example.biitdigitallibrarysystem.teacherActivities.TableOFContent;
 
@@ -75,13 +80,27 @@ public class MyBookTeacherAdapter extends RecyclerView.Adapter<MyBookTeacherAdap
 
     @Override
     public void onBindViewHolder(@NonNull MyBookTeacherAdapter.ItemViewHolder holder, @SuppressLint("RecyclerView") int position) {
+
+        UserDao userDao= AppDatabase.getAppDatabase(context).getUserDao();
+        List<User>booknameslist=userDao.getFvtFilePath(books.get(position).getTitle());
+        if (!(booknameslist.isEmpty())){
+            holder.btnfav.setImageResource(R.drawable.starfull);
+        }else {
+            holder.btnfav.setImageResource(R.drawable.star);
+        }
+
 //        MyBookTeacherModel item = itemList.get(position);
 //        holder.itemNameTextView.setText(item.getName());
 //        holder.itemDescriptionTextView.setText(item.getDescription());
         holder.Books.setText(books.get(position).getTitle());
         new DownloadImageTask(holder.imageupload).execute(imagePath+books.get(position).getImage_path());
+//        holder.itemView.setOnClickListener(view ->
+//                openPDFFile(filePath+books.get(position).getPdf_path()));
+
         holder.itemView.setOnClickListener(view ->
-                openPDFFile(filePath+books.get(position).getPdf_path()));
+                openPdfFile(filePath + books.get(position).getPdf_path()));
+
+
         holder.btndownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,7 +111,7 @@ public class MyBookTeacherAdapter extends RecyclerView.Adapter<MyBookTeacherAdap
             @Override
             public void onClick(View view) {
                 TableOFContent.bid=books.get(position).getBid();
-                Intent i = new Intent(context.getApplicationContext(), TableOFContent.class);
+                Intent i = new Intent(context.getApplicationContext(), AddTOC_book.class);
                 context.startActivity(i);
             }
         });
@@ -101,14 +120,17 @@ public class MyBookTeacherAdapter extends RecyclerView.Adapter<MyBookTeacherAdap
         holder.btnfav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ImageView btnfav = holder.btnfav;
-                if (isStarFilled) {
-                    btnfav.setImageResource(R.drawable.star);  // Change to empty star
-                    isStarFilled = false;
-                } else {
-                    btnfav.setImageResource(R.drawable.starfull);  // Change to dark star
-                    isStarFilled = true;
+                ////////fav start
+                List<User> booknames=userDao.getFvtFilePath(books.get(position).getTitle());
+                if (booknames.isEmpty()){
+                    userDao.insertAll(new User(0,books.get(position).getTitle()));
+                    holder.btnfav.setImageResource(R.drawable.starfull);
+                    Toast.makeText(context, "Added to Bookmarks", Toast.LENGTH_SHORT).show();
+                }else {
+                    userDao.deleteFavourites(books.get(position).getTitle());
+                    holder.btnfav.setImageResource(R.drawable.star);
                 }
+                /////fav end
             }
 
         });
@@ -126,18 +148,25 @@ public class MyBookTeacherAdapter extends RecyclerView.Adapter<MyBookTeacherAdap
     public int getItemCount() {
         return books.size();
     }
-    private void openPDFFile(String filePath) {
-        Uri file = Uri.parse(filePath);
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(file, "application/pdf");
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        Intent intentChooser = Intent.createChooser(intent, "Open PDF with");
 
-        // Verify that there is an app available to handle the intent
-        if (intent.resolveActivity(context.getPackageManager()) != null) {
-            context.startActivity(intentChooser);
-        } else {
-            Toast.makeText(context, "No PDF viewer app found.", Toast.LENGTH_SHORT).show();
+    public void openPdfFile(String pdfFilePath)
+    {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+//        String pathFile= Environment.getExternalStorageDirectory()
+//                + "/Download/13_CSS Web Design For Dummies.pdf";
+//        String pathFile= Environment.getExternalStorageDirectory()
+//                + "/Download/"+pdfFilePath;
+//        Toast.makeText(context, ""+pdfFilePath, Toast.LENGTH_SHORT).show();
+        Uri uri = Uri.parse( pdfFilePath);
+
+        intent.setDataAndType(uri, "application/pdf");
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        try
+        {
+            context.startActivity(intent);
+        } catch (ActivityNotFoundException e)
+        {
+            Toast.makeText(context, "No PDF viewer application found.", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -1,10 +1,16 @@
 package com.example.biitdigitallibrarysystem.adapters;
 
+import android.annotation.SuppressLint;
+import android.app.DownloadManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,15 +19,22 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.biitdigitallibrarysystem.MainActivity;
 import com.example.biitdigitallibrarysystem.R;
 import com.example.biitdigitallibrarysystem.apiServices.APIClient;
 import com.example.biitdigitallibrarysystem.apiServices.Endpoint;
+import com.example.biitdigitallibrarysystem.models.AppDatabase;
 import com.example.biitdigitallibrarysystem.models.LessonPlanModel;
+import com.example.biitdigitallibrarysystem.models.PdfDownloader;
+import com.example.biitdigitallibrarysystem.models.User;
+import com.example.biitdigitallibrarysystem.models.UserDao;
+import com.example.biitdigitallibrarysystem.studentActivites.Std_ReferenceAndLink;
 import com.example.biitdigitallibrarysystem.teacherActivities.EditLessonPlan;
 import com.example.biitdigitallibrarysystem.teacherActivities.LessonPlanActivity;
 import com.example.biitdigitallibrarysystem.teacherActivities.ReferencesAndLinks;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -34,6 +47,7 @@ public class StudentLessonPlanAdapter extends RecyclerView.Adapter<StudentLesson
     Context context;
     boolean isStarFilled = false;
     public static int lid;
+    String filePath = APIClient.getFilePath();
 
     ArrayList<LessonPlanModel> lessonPlanModelList;
 
@@ -51,10 +65,23 @@ public class StudentLessonPlanAdapter extends RecyclerView.Adapter<StudentLesson
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StudentLessonPlanAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull StudentLessonPlanAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         LessonPlanModel object = lessonPlanModelList.get(position);
-//        holder.filename.setText(lessonPlanModel.getPath());
 
+        holder.filename.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // openPdfFile(filePath + object.getPath());
+            }
+        });
+//        holder.filename.setText(lessonPlanModel.getPath());
+        UserDao userDao= AppDatabase.getAppDatabase(context).getUserDao();
+        List<User> booknameslist=userDao.getFvtFilePath(String.valueOf(object.getTitle()));
+        if (!(booknameslist.isEmpty())){
+            holder.btnfav.setImageResource(R.drawable.starfull);
+        }else {
+            holder.btnfav.setImageResource(R.drawable.star);
+        }
 
         holder.filename.setText(object.getTitle());
 //        holder.lid.setText(object.getLid());
@@ -62,16 +89,17 @@ public class StudentLessonPlanAdapter extends RecyclerView.Adapter<StudentLesson
         holder.btnfav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ImageView btnfav = holder.btnfav;
-                if (isStarFilled) {
-                    btnfav.setImageResource(R.drawable.star);  // Change to empty star
-                    isStarFilled = false;
-                } else {
-                    btnfav.setImageResource(R.drawable.starfull);  // Change to dark star
-                    isStarFilled = true;
+                List<User> booknames=userDao.getFvtFilePath(String.valueOf(object.getTitle()));
+                if (booknames.isEmpty()){
+                    userDao.insertAll(new User(0,String.valueOf(object.getTitle())));
+                    holder.btnfav.setImageResource(R.drawable.starfull);
+                    Toast.makeText(context, "Added to Bookmarks", Toast.LENGTH_SHORT).show();
+                }else {
+                    userDao.deleteFavourites(String.valueOf(object.getTitle()));
+                    holder.btnfav.setImageResource(R.drawable.star);
                 }
-
             }
+
         });
         holder.btnRefrenece.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,9 +107,12 @@ public class StudentLessonPlanAdapter extends RecyclerView.Adapter<StudentLesson
                 lid = lessonPlanModelList.get(holder.getAdapterPosition()).getLid();
                 int tid= LessonPlanActivity.tid;
                 int lid=LessonPlanActivity.lid;
+                int sid = MainActivity.sid;
                 String role= LessonPlanActivity.role;
-                Intent intent=new Intent(context,ReferencesAndLinks.class);
+//                Intent intent=new Intent(context,ReferencesAndLinks.class);
+                Intent intent=new Intent(context, Std_ReferenceAndLink.class);
                 intent.putExtra("tid",tid);
+                intent.putExtra("sid",sid);
                 intent.putExtra("lid",lid);
                 intent.putExtra("role",role);
                 context.startActivity(intent);
@@ -90,9 +121,31 @@ public class StudentLessonPlanAdapter extends RecyclerView.Adapter<StudentLesson
         holder.btnDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                String url = "https://example.com/path/to/file.pdf"; // Replace with the URL of the PDF or Word file
+//
+//                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+//                Toast.makeText(context, "Downloading PDF...", Toast.LENGTH_SHORT).show();
+//                request.setTitle("File Download"); // Set the title of the download notification
+//                request.setDescription("Downloading File"); // Set the description of the download notification
+//                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED); // Show the download progress in the notification bar
+//
+//                // Determine the file name and file type from the URL
+//                String fileName = "file.pdf";
+//                String fileExtension = MimeTypeMap.getFileExtensionFromUrl(url);
+//                if (fileExtension != null && !fileExtension.isEmpty()) {
+//                    fileName = "file." + fileExtension;
+//                }
+//
+//                // Set the destination path for the downloaded file
+//                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
+//
+//                DownloadManager downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+//                if (downloadManager != null) {
+//                    downloadManager.enqueue(request);
+//                }
+//            }
 
-
-
+                new PdfDownloader(context).downloadPdf(filePath + lessonPlanModelList.get(position).getPath());
             }
         });
     }
@@ -114,6 +167,27 @@ public class StudentLessonPlanAdapter extends RecyclerView.Adapter<StudentLesson
             btnfav=itemView.findViewById(R.id.fav_lessonplan);
             btnDownload=itemView.findViewById(R.id.download_lessonplan);
 
+        }
+    }
+    ///////openpdf
+    public void openPdfFile(String pdfFilePath)
+    {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+//        String pathFile= Environment.getExternalStorageDirectory()
+//                + "/Download/13_CSS Web Design For Dummies.pdf";
+//        String pathFile= Environment.getExternalStorageDirectory()
+//                + "/Download/"+pdfFilePath;
+//        Toast.makeText(context, ""+pdfFilePath, Toast.LENGTH_SHORT).show();
+        Uri uri = Uri.parse( pdfFilePath);
+
+        intent.setDataAndType(uri, "application/pdf");
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        try
+        {
+            context.startActivity(intent);
+        } catch (ActivityNotFoundException e)
+        {
+            Toast.makeText(context, "No PDF viewer application found.", Toast.LENGTH_SHORT).show();
         }
     }
 }
